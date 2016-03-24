@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/layout_item_bg"
+    android:orientation="horizontal"
+    android:padding="@dimen/space_8">
+
+    <ViewStub
+        android:id="@+id/stub_list_cell_news_base"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout="@layout/list_cell_news_base" />
+
+    <ViewStub
+        android:id="@+id/stub_list_cell_news_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout="@layout/list_cell_news_photo" />
+</LinearLayout>
