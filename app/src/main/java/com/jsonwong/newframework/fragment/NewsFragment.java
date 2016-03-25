@@ -4,12 +4,14 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.jsonwong.newframework.adapter.NewsAdapter;
+import com.jsonwong.newframework.adapter.base.ListBaseAdapter;
 import com.jsonwong.newframework.api.remote.OSChinaApi;
 import com.jsonwong.newframework.base.BaseListFragment;
 import com.jsonwong.newframework.bean.ListEntity;
 import com.jsonwong.newframework.bean.NewModle;
 import com.jsonwong.newframework.bean.NewsList;
 import com.jsonwong.newframework.interf.OnTabReselectListener;
+import com.jsonwong.newframework.ui.empty.EmptyLayout;
 import com.jsonwong.newframework.util.UIHelper;
 
 import java.io.InputStream;
@@ -69,7 +71,7 @@ public class NewsFragment extends BaseListFragment<NewModle> implements
                             long id) {
         NewModle news = mAdapter.getItem(position);
         if (news != null) {
-            UIHelper.showNewsDetail(view.getContext(), news.getDocid(), news.getReplyCount());
+            UIHelper.showNewsDetail(view.getContext(), news.getDocid(), news.getImgsrc());
 
             // 放入已读列表
             saveToReadedList(view, NewsList.PREF_READED_NEWS_LIST, news.getDocid()
@@ -79,7 +81,7 @@ public class NewsFragment extends BaseListFragment<NewModle> implements
 
     @Override
     protected void executeOnLoadDataSuccess(List<NewModle> data) {
-       /* if (mCatalog == NewsList.CATALOG_WEEK
+        if (mCatalog == NewsList.CATALOG_WEEK
                 || mCatalog == NewsList.CATALOG_MONTH) {
             mErrorLayout.setErrorType(EmptyLayout.HIDE_LAYOUT);
             if (mState == STATE_REFRESH)
@@ -88,7 +90,7 @@ public class NewsFragment extends BaseListFragment<NewModle> implements
             mState = STATE_NOMORE;
             mAdapter.setState(ListBaseAdapter.STATE_NO_MORE);
             return;
-        }*/
+        }
         super.executeOnLoadDataSuccess(data);
     }
 
@@ -100,10 +102,10 @@ public class NewsFragment extends BaseListFragment<NewModle> implements
     @Override
     protected long getAutoRefreshTime() {
         // 最新资讯两小时刷新一次
-       /* if (mCatalog == NewsList.CATALOG_ALL) {
+        if (mCatalog == NewsList.CATALOG_ALL) {
 
             return 2 * 60 * 60;
-        }*/
+        }
         return super.getAutoRefreshTime();
     }
 }

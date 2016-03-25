@@ -48,10 +48,10 @@ public class UIHelper {
      * @param newsId
      */
     public static void showNewsDetail(Context context, String newsId,
-                                      String commentCount) {
+                                      String imageUrl) {
         Intent intent = new Intent(context, DetailActivity.class);
-        intent.putExtra("id", newsId);
-        intent.putExtra("comment_count", commentCount);
+        intent.putExtra(DetailActivity.NEWS_ID, newsId);
+        intent.putExtra(DetailActivity.NEWS_IMAGE_URL, imageUrl);
         intent.putExtra(DetailActivity.BUNDLE_KEY_DISPLAY_TYPE,
                 DetailActivity.DISPLAY_NEWS);
         context.startActivity(intent);

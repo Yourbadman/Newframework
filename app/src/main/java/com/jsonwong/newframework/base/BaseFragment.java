@@ -37,6 +37,7 @@ public class BaseFragment extends Fragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        afterCreate(savedInstanceState);
     }
 
     @Override
@@ -104,6 +105,11 @@ public class BaseFragment extends Fragment implements
 
     @Override
     public void initData() {
+
+    }
+
+    @Override
+    public void afterCreate(Bundle savedInstanceState) {
 
     }
 

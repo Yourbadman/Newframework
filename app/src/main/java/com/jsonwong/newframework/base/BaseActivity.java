@@ -13,10 +13,12 @@ import android.widget.TextView;
 import com.jsonwong.newframework.AppContext;
 import com.jsonwong.newframework.AppManager;
 import com.jsonwong.newframework.R;
+import com.jsonwong.newframework.base.swipeback.SwipeBackActivity;
 import com.jsonwong.newframework.interf.BaseViewInterface;
 import com.jsonwong.newframework.ui.dialog.CommonToast;
 import com.jsonwong.newframework.ui.dialog.DialogControl;
 import com.jsonwong.newframework.util.DialogHelp;
+import com.jsonwong.newframework.util.SwipebackUtils;
 import com.jsonwong.newframework.util.TDevice;
 
 import org.kymjs.kjframe.utils.StringUtils;
@@ -29,7 +31,7 @@ import butterknife.ButterKnife;
  * @author FireAnt（http://my.oschina.net/LittleDY）
  * @created 2014年9月25日 上午11:30:15 引用自：tonlin
  */
-public abstract class BaseActivity extends AppCompatActivity implements
+public abstract class BaseActivity extends SwipeBackActivity implements
         DialogControl, View.OnClickListener, BaseViewInterface {
     public static final String INTENT_ACTION_EXIT_APP = "INTENT_ACTION_EXIT_APP";
 

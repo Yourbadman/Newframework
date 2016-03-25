@@ -1,5 +1,12 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <style name="SwipeBackLayout">
+        <item name="edge_size">50dip</item>
+        <item name="shadow_left">@drawable/shadow_left</item>
+        <item name="shadow_right">@drawable/shadow_right</item>
+        <item name="shadow_bottom">@drawable/shadow_bottom</item>
+    </style>
+
     <style name="subscribe_my_tip_text">
         <item name="android:textSize">16.0sp</item>
         <item name="android:textStyle">bold</item>
@@ -7,6 +14,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
     <style name="subscribe_seperate_line">
         <item name="android:background">@color/subscribe_seperate_line</item>
         <item name="android:layout_width">fill_parent</item>
@@ -14,6 +22,7 @@
         <item name="android:layout_marginTop">14.0dip</item>
         <item name="android:layout_marginBottom">14.0dip</item>
     </style>
+
     <style name="Widget"></style>
 
     <style name="Widget.ProgressBar">
