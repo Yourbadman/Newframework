@@ -12,6 +12,8 @@ import com.jsonwong.newframework.R;
 import com.jsonwong.newframework.interf.BaseFragmentInterface;
 import com.squareup.leakcanary.RefWatcher;
 
+import butterknife.ButterKnife;
+
 
 /**
  * 碎片基类
@@ -34,10 +36,13 @@ public class BaseFragment extends Fragment implements
         return (AppContext) getActivity().getApplication();
     }
 
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        afterCreate(savedInstanceState);
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.inject(this, view);
+        initView(view);
+        initData();
     }
 
     @Override
@@ -45,6 +50,8 @@ public class BaseFragment extends Fragment implements
                              Bundle savedInstanceState) {
         this.mInflater = inflater;
         View view = super.onCreateView(inflater, container, savedInstanceState);
+        if (view == null)
+            view = inflater.inflate(getLayoutId(), container, false);
         return view;
     }
 
@@ -108,10 +115,6 @@ public class BaseFragment extends Fragment implements
 
     }
 
-    @Override
-    public void afterCreate(Bundle savedInstanceState) {
-
-    }
 
     @Override
     public void onClick(View v) {

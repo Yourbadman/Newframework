@@ -9,7 +9,9 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import com.jsonwong.newframework.base.BaseFragment;
 import com.jsonwong.newframework.bean.News;
 import com.jsonwong.newframework.ui.DetailActivity;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -55,13 +58,6 @@ public class NewsDetailFragment_ extends BaseFragment {
         return R.layout.fragment_news_detail_;
     }
 
-    @Override
-    public void afterCreate(Bundle savedInstanceState) {
-
-        newId = getArguments().getString(DetailActivity.NEWS_ID);
-        imageUrl = getArguments().getString(DetailActivity.NEWS_IMAGE_URL);
-
-    }
 
     @Override
     public void initView(View view) {
@@ -72,50 +68,18 @@ public class NewsDetailFragment_ extends BaseFragment {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         mCollapsingToolbarLayout.setTitleEnabled(false);
+
+        newId = getArguments().getString(DetailActivity.NEWS_ID);
+        imageUrl = getArguments().getString(DetailActivity.NEWS_IMAGE_URL);
+
+        if (imageUrl != null)
+            mIvHeader.setImageURI(Uri.parse(imageUrl));
+
     }
 
     @Override
     public void initData() {
 
-        if (imageUrl != null)
-            mIvHeader.setImageURI(Uri.parse(imageUrl));
-/*        RetrofitManager.builder().getNewsDetail(mNews.getId())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Action0() {
-                    @Override
-                    public void call() {
-                        showProgress();
-                    }
-                })
-                .subscribe(new Action1<NewsDetail>() {
-                    @Override
-                    public void call(NewsDetail newsDetail) {
-                        hideProgress();
-                        L.object(newsDetail);
-                        if (newsDetail == null) {
-                            mTvLoadEmpty.setVisibility(View.VISIBLE);
-                        } else {
-                            Glide.with(getActivity())
-                                    .load(newsDetail.getImage())
-                                    .into(mIvHeader);
-                            mTvTitle.setText(newsDetail.getTitle());
-                            mTvSource.setText(newsDetail.getImage_source());
-                            String htmlData = HtmlUtil.createHtmlData(newsDetail);
-                            mWvNews.loadData(htmlData, HtmlUtil.MIME_TYPE, HtmlUtil.ENCODING);
-                            mTvLoadEmpty.setVisibility(View.GONE);
-                        }
-                        mTvLoadError.setVisibility(View.GONE);
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        hideProgress();
-                        L.e(throwable,"Load news detail error");
-                        mTvLoadError.setVisibility(View.VISIBLE);
-                        mTvLoadEmpty.setVisibility(View.GONE);
-                    }
-                });*/
     }
 
 

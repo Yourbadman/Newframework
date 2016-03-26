@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements
         }
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-        initView();
+        initView(savedInstanceState);
         AppManager.getAppManager().addActivity(this);
 
         handleIntent(getIntent());
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements
 
 
     @Override
-    public void initView() {
+    public void initView(Bundle bundle) {
         mDoubleClickExit = new DoubleClickExitHelper(this);
         mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.navigation_drawer);

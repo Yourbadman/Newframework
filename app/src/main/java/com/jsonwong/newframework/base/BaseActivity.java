@@ -2,19 +2,24 @@ package com.jsonwong.newframework.base;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 
 import com.jsonwong.newframework.AppContext;
 import com.jsonwong.newframework.AppManager;
 import com.jsonwong.newframework.R;
 import com.jsonwong.newframework.base.swipeback.SwipeBackActivity;
+import com.jsonwong.newframework.base.swipeback.SwipeBackLayout;
+import com.jsonwong.newframework.fragment.NewsDetailFragment_;
 import com.jsonwong.newframework.interf.BaseViewInterface;
+import com.jsonwong.newframework.ui.DetailActivity;
 import com.jsonwong.newframework.ui.dialog.CommonToast;
 import com.jsonwong.newframework.ui.dialog.DialogControl;
 import com.jsonwong.newframework.util.DialogHelp;
@@ -42,6 +47,10 @@ public abstract class BaseActivity extends SwipeBackActivity implements
     protected ActionBar mActionBar;
     private TextView mTvActionTitle;
 
+
+    //返回的布局
+    protected SwipeBackLayout mSwipeBackLayout;
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -57,9 +66,14 @@ public abstract class BaseActivity extends SwipeBackActivity implements
         } else {
             setTheme(R.style.AppBaseTheme_Light);
         }
-        AppManager.getAppManager().addActivity(this);
+
+        if (hasAddActivity2Manage())
+            AppManager.getAppManager().addActivity(this);
+
         if (!hasActionBar()) {
-            // supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+            supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        } else {
+            initActionBar(mActionBar);
         }
         onBeforeSetContentLayout();
         if (getLayoutId() != 0) {
@@ -67,20 +81,43 @@ public abstract class BaseActivity extends SwipeBackActivity implements
         }
         mActionBar = getSupportActionBar();
         mInflater = getLayoutInflater();
-        if (hasActionBar()) {
-            initActionBar(mActionBar);
-        }
-
+        mSwipeBackLayout = getSwipeBackLayout();
+        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
+        //设置可以滑动返回的大小
+        mSwipeBackLayout.setEdgeDp(200);
         // 通过注解绑定控件
         ButterKnife.inject(this);
 
-        init(savedInstanceState);
-        initView();
+        initView(savedInstanceState);
         initData();
         _isVisible = true;
     }
 
+    @Override
+    public void initView(Bundle bundle) {
+        BaseFragment fragment = getShowFragment();
+        if (fragment == null)
+            return;
+        setActionBarTitle(getActionBarTitle());
+
+        FragmentTransaction trans = getSupportFragmentManager()
+                .beginTransaction();
+        Bundle arguments = getFragmentArguments();
+        if (arguments != null) {
+            fragment.setArguments(arguments);
+        }
+
+
+        trans.replace(R.id.option, fragment);
+        trans.commitAllowingStateLoss();
+
+    }
+
     protected void onBeforeSetContentLayout() {
+    }
+
+    protected boolean hasAddActivity2Manage() {
+        return true;
     }
 
     protected boolean hasActionBar() {
@@ -88,7 +125,7 @@ public abstract class BaseActivity extends SwipeBackActivity implements
     }
 
     protected int getLayoutId() {
-        return 0;
+        return R.layout.base_fragment_content;
     }
 
     protected View inflateView(int resId) {
@@ -99,12 +136,15 @@ public abstract class BaseActivity extends SwipeBackActivity implements
         return R.string.app_name;
     }
 
-    protected boolean hasBackButton() {
+        protected boolean hasBackButton() {
         return false;
     }
 
-    protected void init(Bundle savedInstanceState) {
-    }
+    protected abstract BaseFragment getShowFragment();
+
+
+    protected abstract Bundle getFragmentArguments();
+
 
     protected void initActionBar(ActionBar actionBar) {
         if (actionBar == null)

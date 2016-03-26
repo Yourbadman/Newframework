@@ -16,5 +16,4 @@ public interface BaseFragmentInterface {
 
     public void initData();
 
-    public void afterCreate(Bundle bundle);
 }

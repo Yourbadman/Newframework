@@ -1,5 +1,7 @@
 package com.jsonwong.newframework.interf;
 
+import android.os.Bundle;
+
 /**
  * 
  * @author deyi
@@ -7,7 +9,7 @@ package com.jsonwong.newframework.interf;
  */
 public interface BaseViewInterface {
 	
-	public void initView();
+	public void initView(Bundle savedInstanceState);
 	
 	public void initData();
 	
