@@ -71,7 +71,7 @@ public class NewsFragment extends BaseListFragment<NewModle> implements
                             long id) {
         NewModle news = mAdapter.getItem(position);
         if (news != null) {
-            UIHelper.showNewsDetail(view.getContext(), news.getDocid(), news.getImgsrc());
+            UIHelper.showNewsDetail(view.getContext(),news);
 
             // 放入已读列表
             saveToReadedList(view, NewsList.PREF_READED_NEWS_LIST, news.getDocid()

@@ -1,14 +1,11 @@
 package com.jsonwong.newframework.ui;
 
-import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.jsonwong.newframework.R;
 import com.jsonwong.newframework.base.BaseActivity;
 import com.jsonwong.newframework.base.BaseFragment;
-import com.jsonwong.newframework.fragment.NewsDetailFragment;
 import com.jsonwong.newframework.fragment.NewsDetailFragment_;
 
 
@@ -21,6 +18,7 @@ public class DetailActivity extends BaseActivity {
 
     public static final int DISPLAY_NEWS = 0;
     public static final String NEWS_ID = "news_id_1";
+    public static final String NEWS = "news_";
     public static final String NEWS_IMAGE_URL = "news_image_url";
     public static final String BUNDLE_KEY_DISPLAY_TYPE = "BUNDLE_KEY_DISPLAY_TYPE";
 
@@ -46,9 +44,7 @@ public class DetailActivity extends BaseActivity {
         Bundle bundle = null;
         if (getIntent() != null && getIntent().getExtras() != null) {
             bundle = new Bundle();
-            bundle.putString(DetailActivity.NEWS_ID, getIntent().getExtras().getString(DetailActivity.NEWS_ID));
-            bundle.putString(DetailActivity.NEWS_IMAGE_URL, getIntent().getExtras().getString(DetailActivity.NEWS_IMAGE_URL));
-
+            bundle.putParcelable(DetailActivity.NEWS, getIntent().getExtras().getParcelable(DetailActivity.NEWS));
         }
         return bundle;
     }

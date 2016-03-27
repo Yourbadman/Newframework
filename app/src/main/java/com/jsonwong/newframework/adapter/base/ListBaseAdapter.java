@@ -2,6 +2,7 @@ package com.jsonwong.newframework.adapter.base;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,14 +13,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.jsonwong.newframework.R;
-import com.jsonwong.newframework.base.BaseModle;
 import com.jsonwong.newframework.util.StringUtils;
 import com.jsonwong.newframework.util.TDevice;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListBaseAdapter<T extends BaseModle> extends BaseAdapter {
+public class ListBaseAdapter<T extends Parcelable> extends BaseAdapter {
     public static final int STATE_EMPTY_ITEM = 0;
     public static final int STATE_LOAD_MORE = 1;
     public static final int STATE_NO_MORE = 2;

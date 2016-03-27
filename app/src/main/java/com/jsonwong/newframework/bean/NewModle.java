@@ -1,11 +1,13 @@
 
 package com.jsonwong.newframework.bean;
 
-import com.jsonwong.newframework.base.BaseModle;
+import android.os.Parcel;
+import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class NewModle extends BaseModle {
+public class NewModle implements Parcelable {
     /**
      *
      */
@@ -143,4 +145,54 @@ public class NewModle extends BaseModle {
     public void setImgsrc(String imgsrc) {
         this.imgsrc = imgsrc;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.docid);
+        dest.writeString(this.title);
+        dest.writeString(this.digest);
+        dest.writeString(this.imgsrc);
+        dest.writeString(this.source);
+        dest.writeString(this.ptime);
+        dest.writeString(this.tag);
+        dest.writeParcelable(this.imagesModle, flags);
+        dest.writeString(this.replyCount);
+        dest.writeString(this.url);
+        dest.writeList(this.imgHeadLists);
+    }
+
+    public NewModle() {
+    }
+
+    protected NewModle(Parcel in) {
+        this.docid = in.readString();
+        this.title = in.readString();
+        this.digest = in.readString();
+        this.imgsrc = in.readString();
+        this.source = in.readString();
+        this.ptime = in.readString();
+        this.tag = in.readString();
+        this.imagesModle = in.readParcelable(ImagesModle.class.getClassLoader());
+        this.replyCount = in.readString();
+        this.url = in.readString();
+        this.imgHeadLists = new ArrayList<ImagesModle>();
+        in.readList(this.imgHeadLists, ImagesModle.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<NewModle> CREATOR = new Parcelable.Creator<NewModle>() {
+        @Override
+        public NewModle createFromParcel(Parcel source) {
+            return new NewModle(source);
+        }
+
+        @Override
+        public NewModle[] newArray(int size) {
+            return new NewModle[size];
+        }
+    };
 }

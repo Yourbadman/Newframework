@@ -4,10 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
@@ -36,12 +35,11 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cz.msebera.android.httpclient.Header;
 
 @SuppressLint("NewApi")
-public abstract class BaseListFragment<T extends BaseModle> extends BaseFragment
+public abstract class BaseListFragment<T extends Parcelable> extends BaseFragment
         implements SwipeRefreshLayout.OnRefreshListener, OnItemClickListener,
         OnScrollListener {
     public String getNewUrl(String index) {
@@ -309,10 +307,10 @@ public abstract class BaseListFragment<T extends BaseModle> extends BaseFragment
 
     private class SaveCacheTask extends AsyncTask<Void, Void, Void> {
         private final WeakReference<Context> mContext;
-        private final Serializable seri;
+        private final Parcelable seri;
         private final String key;
 
-        private SaveCacheTask(Context context, Serializable seri, String key) {
+        private SaveCacheTask(Context context, Parcelable seri, String key) {
             mContext = new WeakReference<Context>(context);
             this.seri = seri;
             this.key = key;
@@ -367,12 +365,12 @@ public abstract class BaseListFragment<T extends BaseModle> extends BaseFragment
             mAdapter.clear();
         }
 
-        for (int i = 0; i < data.size(); i++) {
+      /*  for (int i = 0; i < data.size(); i++) {
             if (compareTo(mAdapter.getData(), data.get(i))) {
                 data.remove(i);
                 i--;
             }
-        }
+        }*/
         int adapterState = ListBaseAdapter.STATE_EMPTY_ITEM;
         if ((mAdapter.getCount() + data.size()) == 0) {
             adapterState = ListBaseAdapter.STATE_EMPTY_ITEM;
@@ -406,7 +404,7 @@ public abstract class BaseListFragment<T extends BaseModle> extends BaseFragment
         return true;
     }
 
-    protected boolean compareTo(List<? extends BaseModle> data, BaseModle enity) {
+    protected boolean compareTo(List<? extends Parcelable> data, BaseModle enity) {
         int s = data.size();
        /* if (enity != null) {
             for (int i = 0; i < s; i++) {

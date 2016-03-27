@@ -45,15 +45,10 @@ public class UIHelper {
      * 显示新闻详情
      *
      * @param context
-     * @param newsId
      */
-    public static void showNewsDetail(Context context, String newsId,
-                                      String imageUrl) {
+    public static void showNewsDetail(Context context, NewModle newModle) {
         Intent intent = new Intent(context, DetailActivity.class);
-        intent.putExtra(DetailActivity.NEWS_ID, newsId);
-        intent.putExtra(DetailActivity.NEWS_IMAGE_URL, imageUrl);
-        intent.putExtra(DetailActivity.BUNDLE_KEY_DISPLAY_TYPE,
-                DetailActivity.DISPLAY_NEWS);
+        intent.putExtra(DetailActivity.NEWS, newModle);
         context.startActivity(intent);
     }
 

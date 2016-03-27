@@ -2,11 +2,7 @@ package com.jsonwong.newframework.fragment;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Handler;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.widget.ContentLoadingProgressBar;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,14 +11,12 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.json.greendao.ChannelItem;
 import com.jsonwong.newframework.AppContext;
 import com.jsonwong.newframework.R;
@@ -31,7 +25,6 @@ import com.jsonwong.newframework.adapter.OtherAdapter;
 import com.jsonwong.newframework.base.BaseFragment;
 import com.jsonwong.newframework.db.service.ChannelManageService;
 import com.jsonwong.newframework.rxbus.RxBus;
-import com.jsonwong.newframework.ui.DetailActivity;
 import com.jsonwong.newframework.util.Constants;
 import com.jsonwong.newframework.widget.DragGrid;
 import com.jsonwong.newframework.widget.OtherGridView;
@@ -99,6 +92,7 @@ public class ChannelFragment extends BaseFragment implements AdapterView.OnItemC
         _rxBus = AppContext.getInstance().getRxBusSingleton();
     }
 
+
     @Override
     public void initData() {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
@@ -108,7 +102,11 @@ public class ChannelFragment extends BaseFragment implements AdapterView.OnItemC
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        actionBar.setDisplayOptions(R.menu.common_detail_menu);
+//         actionBar.setDisplayHomeAsUpEnabled(true);
+//            actionBar.setHomeButtonEnabled(true);
+
+        // mToolbar.setNavigationIcon(R.drawable.actionbar_search_icon);
+
 
         userChannelList = ChannelManageService.getInstance(context).getUserChannel();
         otherChannelList = ChannelManageService.getInstance(context).getOtherChannel();

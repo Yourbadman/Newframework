@@ -382,13 +382,22 @@
     </style>
     <!-- quick option style end -->
 
+    <style name="collapsingToolbarLayout_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/space_2</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_size_25</item>
+    </style>
+
 
     <style name="user_formation_text">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/space_2</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/text_size_11</item>
+        <item name="android:textSize">@dimen/text_size_29</item>
     </style>
 
     <style name="user_formation_info" parent="@style/user_formation_text">
@@ -419,7 +428,9 @@
         <item name="android:textSize">@dimen/text_size_12</item>
         <item name="android:layout_marginTop">@dimen/space_10</item>
     </style>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">  </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"></style>
+
     <style name="Theme.AppStartLoad" parent="android:Theme.Black.NoTitleBar.Fullscreen">
         <item name="android:windowBackground">@drawable/welcome</item>
         <item name="android:windowNoTitle">true</item>

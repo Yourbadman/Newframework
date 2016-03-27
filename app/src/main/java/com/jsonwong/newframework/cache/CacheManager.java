@@ -1,6 +1,7 @@
 package com.jsonwong.newframework.cache;
 
 import android.content.Context;
+import android.os.Parcelable;
 
 import com.jsonwong.newframework.util.TDevice;
 
@@ -28,7 +29,7 @@ public class CacheManager {
      * @param file
      * @throws IOException
      */
-    public static boolean saveObject(Context context, Serializable ser,
+    public static boolean saveObject(Context context, Parcelable ser,
                                      String file) {
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;

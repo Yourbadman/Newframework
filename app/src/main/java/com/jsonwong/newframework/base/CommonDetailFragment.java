@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
@@ -36,7 +37,7 @@ import cz.msebera.android.httpclient.Header;
  * 通用的详情fragment
  * Created by 火蚁 on 15/5/25.
  */
-public abstract class CommonDetailFragment<T extends Serializable> extends BaseFragment {
+public abstract class CommonDetailFragment<T extends Parcelable> extends BaseFragment {
 
     protected int mId;
 
@@ -230,10 +231,10 @@ public abstract class CommonDetailFragment<T extends Serializable> extends BaseF
 
     private class SaveCacheTask extends AsyncTask<Void, Void, Void> {
         private final WeakReference<Context> mContext;
-        private final Serializable seri;
+        private Parcelable  seri;
         private final String key;
 
-        private SaveCacheTask(Context context, Serializable seri, String key) {
+        private SaveCacheTask(Context context, Parcelable seri, String key) {
             mContext = new WeakReference<Context>(context);
             this.seri = seri;
             this.key = key;
