@@ -23,10 +23,10 @@ import com.jsonwong.newframework.ui.DetailActivity;
 import com.jsonwong.newframework.ui.dialog.CommonToast;
 import com.jsonwong.newframework.ui.dialog.DialogControl;
 import com.jsonwong.newframework.util.DialogHelp;
+import com.jsonwong.newframework.util.StringUtils;
 import com.jsonwong.newframework.util.SwipebackUtils;
 import com.jsonwong.newframework.util.TDevice;
 
-import org.kymjs.kjframe.utils.StringUtils;
 
 import butterknife.ButterKnife;
 

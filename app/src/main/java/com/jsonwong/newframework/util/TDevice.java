@@ -713,4 +713,12 @@ public class TDevice {
         }
         return netType;
     }
+    /**
+     * 获取手机系统SDK版本
+     *
+     * @return 如API 17 则返回 17
+     */
+    public static int getSDKVersion() {
+        return android.os.Build.VERSION.SDK_INT;
+    }
 }

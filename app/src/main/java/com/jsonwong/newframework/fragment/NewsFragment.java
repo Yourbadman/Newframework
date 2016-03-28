@@ -42,12 +42,7 @@ public class NewsFragment extends BaseListFragment<NewModle> implements
 
     @Override
     protected ListEntity<NewModle> parseList(InputStream is) throws Exception {
-//        NewsList list = null;
-//        try {
-//            list = XmlUtils.toBean(NewsList.class, is);
-//        } catch (NullPointerException e) {
-//            list = new NewsList();
-//        }
+
         return null;
     }
 

@@ -10,11 +10,10 @@ import android.view.animation.Animation.AnimationListener;
 
 
 import com.jsonwong.newframework.ui.MainActivity;
+import com.jsonwong.newframework.util.FileUtils;
+import com.jsonwong.newframework.util.PreferenceHelper;
 import com.jsonwong.newframework.util.TDevice;
 
-import org.kymjs.kjframe.http.KJAsyncTask;
-import org.kymjs.kjframe.utils.FileUtils;
-import org.kymjs.kjframe.utils.PreferenceHelper;
 
 import java.io.File;
 
@@ -73,14 +72,14 @@ public class AppStart extends Activity {
 
     private void cleanImageCache() {
         final File folder = FileUtils.getSaveFolder("OSChina/imagecache");
-        KJAsyncTask.execute(new Runnable() {
+       /* KJAsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 for (File file : folder.listFiles()) {
                     file.delete();
                 }
             }
-        });
+        });*/
     }
 
     /**

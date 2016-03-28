@@ -26,7 +26,7 @@ public class NewsDetailFragment extends CommonDetailFragment<NewModle> {
     @Override
     protected NewModle parseData(InputStream is) {
         return null;
-        // return XmlUtils.toBean(NewsDetail.class, is).getNews();
+
     }
 
     @Override

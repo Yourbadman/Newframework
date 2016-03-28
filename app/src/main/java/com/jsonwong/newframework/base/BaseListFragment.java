@@ -503,11 +503,7 @@ public abstract class BaseListFragment<T extends Parcelable> extends BaseFragmen
                     list =
                             NewListJson.instance(getActivity()).readJsonNewModles(new String(reponseData),
                                     Url.TopId);
-                    /*ResultBean resultBean = XmlUtils.toBean(ResultBean.class,
-                            reponseData);
-                    if (resultBean != null) {
-                        mResult = resultBean.getResult();
-                    }*/
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();

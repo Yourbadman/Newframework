@@ -4,9 +4,8 @@ import android.content.Context;
 import android.os.Environment;
 
 
+import com.jsonwong.newframework.util.FileUtils;
 import com.jsonwong.newframework.util.TDevice;
-
-import org.kymjs.kjframe.utils.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
