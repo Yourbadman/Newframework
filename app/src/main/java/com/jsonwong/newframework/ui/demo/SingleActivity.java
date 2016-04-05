@@ -9,13 +9,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.imagepipeline.image.ImageInfo;
-import me.relex.photodraweeview.OnPhotoTapListener;
-import me.relex.photodraweeview.OnViewTapListener;
-import me.relex.photodraweeview.PhotoDraweeView;
+import com.jsonwong.newframework.R;
+import com.jsonwong.newframework.widget.photo.OnPhotoTapListener;
+import com.jsonwong.newframework.widget.photo.OnViewTapListener;
+import com.jsonwong.newframework.widget.photo.PhotoDraweeView;
 
 public class SingleActivity extends AppCompatActivity {
 

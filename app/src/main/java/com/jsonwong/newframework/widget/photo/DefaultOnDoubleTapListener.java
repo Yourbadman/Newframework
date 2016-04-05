@@ -3,6 +3,7 @@ package com.jsonwong.newframework.widget.photo;
 import android.graphics.RectF;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.view.DraweeView;
 
@@ -14,7 +15,8 @@ public class DefaultOnDoubleTapListener implements GestureDetector.OnDoubleTapLi
         setPhotoDraweeViewAttacher(attacher);
     }
 
-    @Override public boolean onSingleTapConfirmed(MotionEvent e) {
+    @Override
+    public boolean onSingleTapConfirmed(MotionEvent e) {
 
         if (mAttacher == null) {
             return false;
@@ -46,7 +48,8 @@ public class DefaultOnDoubleTapListener implements GestureDetector.OnDoubleTapLi
         return false;
     }
 
-    @Override public boolean onDoubleTap(MotionEvent event) {
+    @Override
+    public boolean onDoubleTap(MotionEvent event) {
         if (mAttacher == null) {
             return false;
         }
@@ -69,7 +72,8 @@ public class DefaultOnDoubleTapListener implements GestureDetector.OnDoubleTapLi
         return true;
     }
 
-    @Override public boolean onDoubleTapEvent(MotionEvent event) {
+    @Override
+    public boolean onDoubleTapEvent(MotionEvent event) {
         return false;
     }
 

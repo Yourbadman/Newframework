@@ -17,6 +17,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/view_pager"
-        android:title="@string/view_pager"
+        android:title="view_pager"
         app:showAsAction="never"/>
 </menu>

@@ -45,20 +45,13 @@ public class JsonUtils<T> {
      * @param json
      * @return
      */
-    public List<T> json2Object(Class<T> clazz, String json) {
-        Moshi moshi = new Moshi.Builder().build();
-        JsonAdapter<T> jsonAdapter = moshi.adapter(clazz);
-
-        try {
-            return jsonAdapter.fromJson(json);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-
-    }
-
+//    public List<T> json2Object(Class<T> clazz, String json) {
+//        Moshi moshi = new Moshi.Builder().build();
+//        JsonAdapter<T> jsonAdapter = moshi.adapter(clazz);
+//        return jsonAdapter;
+//
+//
+//    }
 
 
 }
