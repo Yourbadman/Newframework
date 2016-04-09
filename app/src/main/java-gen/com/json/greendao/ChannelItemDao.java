@@ -28,6 +28,7 @@ public class ChannelItemDao extends AbstractDao<ChannelItem, Void> {
         public final static Property OrderId = new Property(2, Integer.class, "orderId", false, "ORDER_ID");
         public final static Property Selected = new Property(3, Integer.class, "selected", false, "SELECTED");
         public final static Property ChannelId = new Property(4, String.class, "channelId", false, "CHANNEL_ID");
+        public final static Property UrlType = new Property(5, Integer.class, "urlType", false, "URL_TYPE");
     };
 
 
@@ -47,7 +48,8 @@ public class ChannelItemDao extends AbstractDao<ChannelItem, Void> {
                 "\"NAME\" TEXT NOT NULL ," + // 1: name
                 "\"ORDER_ID\" INTEGER," + // 2: orderId
                 "\"SELECTED\" INTEGER," + // 3: selected
-                "\"CHANNEL_ID\" TEXT);"); // 4: channelId
+                "\"CHANNEL_ID\" TEXT," + // 4: channelId
+                "\"URL_TYPE\" INTEGER);"); // 5: urlType
     }
 
     /** Drops the underlying database table. */
@@ -81,6 +83,11 @@ public class ChannelItemDao extends AbstractDao<ChannelItem, Void> {
         if (channelId != null) {
             stmt.bindString(5, channelId);
         }
+ 
+        Integer urlType = entity.getUrlType();
+        if (urlType != null) {
+            stmt.bindLong(6, urlType);
+        }
     }
 
     /** @inheritdoc */
@@ -97,7 +104,8 @@ public class ChannelItemDao extends AbstractDao<ChannelItem, Void> {
             cursor.getString(offset + 1), // name
             cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // orderId
             cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // selected
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // channelId
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // channelId
+            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5) // urlType
         );
         return entity;
     }
@@ -110,6 +118,7 @@ public class ChannelItemDao extends AbstractDao<ChannelItem, Void> {
         entity.setOrderId(cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2));
         entity.setSelected(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
         entity.setChannelId(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setUrlType(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
      }
     
     /** @inheritdoc */

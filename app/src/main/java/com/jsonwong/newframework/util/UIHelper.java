@@ -10,7 +10,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ZoomButtonsController;
 
-import com.jsonwong.newframework.bean.NewModle;
+import com.jsonwong.newframework.bean.NewsListBean;
 import com.jsonwong.newframework.ui.DetailActivity;
 
 /**
@@ -46,7 +46,7 @@ public class UIHelper {
      *
      * @param context
      */
-    public static void showNewsDetail(Context context, NewModle newModle) {
+    public static void showNewsDetail(Context context, NewsListBean newModle) {
         Intent intent = new Intent(context, DetailActivity.class);
         intent.putExtra(DetailActivity.NEWS, newModle);
         context.startActivity(intent);
@@ -57,7 +57,7 @@ public class UIHelper {
      *
      * @param context context
      */
-    public static void showNewsRedirect(Context context, NewModle news) {
+    public static void showNewsRedirect(Context context, NewsListBean news) {
 //        String url = news.get
 //
 //        // url为空-旧方法

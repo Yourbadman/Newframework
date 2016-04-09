@@ -1,83 +1,70 @@
 
 package com.jsonwong.newframework.http;
 
+import com.json.greendao.ChannelItem;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Url {
+
+    public enum UrlType {
+
+        HeadUrl(1, "nc/article/headline/"),
+        HousrUrl(2, "nc/article/house/"),
+        LocalUrl(3, "nc/article/local/"),
+        CommonUrl(4, "nc/article/list/");
+
+        private UrlType(int i, String url) {
+            this.id = i;
+            this.url = url;
+
+        }
+
+        private Integer id;
+        private String url;
+
+
+        public static String getUrlById(int id) {
+            switch (id) {
+                case 1:
+                    return HeadUrl.getUrl();
+                case 2:
+                    return HousrUrl.getUrl();
+                case 3:
+                    return LocalUrl.getUrl();
+                case 4:
+                    return CommonUrl.getUrl();
+                default:
+                    return HeadUrl.getUrl();
+            }
+
+        }
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+    }
+
     public static final String host = "http://c.m.163.com/";
     public static final String endUrl = "-20.html";
     public static final String endDetailUrl = "/full.html";
-    // 头条
-    public static final String TopUrl = host + "nc/article/headline/";
-    public static final String TopId = "T1348647909107";
     // 新闻详情
     public static final String NewDetail = host + "nc/article/";
-    // 足球
-    public static final String CommonUrl = host + "nc/article/list/";
-    public static final String FootId = "T1399700447917";
-    // 娱乐
-    public static final String YuLeId = "T1348648517839";
-    // 体育
-    public static final String TiYuId = "T1348649079062";
-    // 财经
-    public static final String CaiJingId = "T1348648756099";
-    // 科技
-    public static final String KeJiId = "T1348649580692";
-    // 电影
-    public static final String DianYingId = "T1348648650048";
-    // 汽车
-    public static final String QiChiId = "T1348654060988";
-    // 笑话
-    public static final String XiaoHuaId = "T1350383429665";
-    // 笑话
-    public static final String YouXiId = "T1348654151579";
-    // 时尚
-    public static final String ShiShangId = "T1348650593803";
-    // 情感
-    public static final String QingGanId = "T1348650839000";
-    // 精选
-    public static final String JingXuanId = "T1370583240249";
-    // 电台
-    public static final String DianTaiId = "T1379038288239";
-    // nba
-    public static final String NBAId = "T1348649145984";
-    // 数码
-    public static final String ShuMaId = "T1348649776727";
-    // 数码
-    public static final String YiDongId = "T1351233117091";
-    // 彩票
-    public static final String CaiPiaoId = "T1356600029035";
-    // 教育
-    public static final String JiaoYuId = "T1348654225495";
-    // 论坛
-    public static final String LunTanId = "T1349837670307";
-    // 旅游
-    public static final String LvYouId = "T1348654204705";
-    // 手机
-    public static final String ShouJiId = "T1348649654285";
-    // 博客
-    public static final String BoKeId = "T1349837698345";
-    // 社会
-    public static final String SheHuiId = "T1348648037603";
-    // 家居
-    public static final String JiaJuId = "T1348654105308";
-    // 暴雪游戏
-    public static final String BaoXueId = "T1397016069906";
-    // 亲子
-    public static final String QinZiId = "T1397116135282";
-    // CBA
-    public static final String CBAId = "T1348649475931";
-    // 消息
-    public static final String MsgId = "T1371543208049";
 
-    // 北京
-    public static final String Local = host + "nc/article/local/";
 
-    public static final String BeiJingId = "5YyX5Lqs";
-    // 军事
-    public static final String JunShiId = "T1348648141035";
-    // 房产
-    public static final String FangChan = host + "nc/article/house/";
-    // 房产id
-    public static final String FangChanId = "5YyX5Lqs";
     // 图集
     public static final String TuJi = host + "photo/api/morelist/0096/4GJ60096/";// 42358.json
     // 图集end
@@ -126,4 +113,9 @@ public class Url {
     public static final String MEITU_ID = "http://api.sina.cn/sinago/list.json?channel=hdpic_pretty&adid=4ad30dabe134695c3b7c3a65977d7e72&wm=b207&from=6042095012&chwm=12050_0001&oldchwm=12050_0001&imei=867064013906290&uid=802909da86d9f5fc&p=";
     // 故事列表
     public static final String GUSHI_ID = "http://api.sina.cn/sinago/list.json?channel=hdpic_story&adid=4ad30dabe134695c3b7c3a65977d7e72&wm=b207&from=6042095012&chwm=12050_0001&oldchwm=12050_0001&imei=867064013906290&uid=802909da86d9f5fc&p=";
+
+    public static String getNewUrl(ChannelItem channleItem, String index) {
+        return Url.host + UrlType.getUrlById(channleItem.getUrlType()) + channleItem.getChannelId() + "/" + index + Url.endUrl;
+
+    }
 }

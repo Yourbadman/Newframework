@@ -14,16 +14,18 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.json.greendao.ChannelItem;
 import com.jsonwong.newframework.AppContext;
 import com.jsonwong.newframework.R;
 import com.jsonwong.newframework.adapter.base.ListBaseAdapter;
 import com.jsonwong.newframework.bean.ListEntity;
-import com.jsonwong.newframework.bean.NewModle;
+import com.jsonwong.newframework.bean.NewsListBean;
 import com.jsonwong.newframework.bean.Result;
 import com.jsonwong.newframework.cache.CacheManager;
-import com.jsonwong.newframework.http.Url;
-import com.jsonwong.newframework.http.json.NewListJson;
 import com.jsonwong.newframework.ui.empty.EmptyLayout;
+import com.jsonwong.newframework.util.JsonUtils;
 import com.jsonwong.newframework.util.StringUtils;
 import com.jsonwong.newframework.util.TDevice;
 import com.jsonwong.newframework.util.ThemeSwitchUtils;
@@ -33,7 +35,9 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.InjectView;
 import cz.msebera.android.httpclient.Header;
@@ -42,11 +46,9 @@ import cz.msebera.android.httpclient.Header;
 public abstract class BaseListFragment<T extends Parcelable> extends BaseFragment
         implements SwipeRefreshLayout.OnRefreshListener, OnItemClickListener,
         OnScrollListener {
-    public String getNewUrl(String index) {
-        String urlString = Url.TopUrl + Url.TopId + "/" + index + Url.endUrl;
-        return urlString;
-    }
 
+
+    public static final String BUNDLE_CHANNLE_ID = "bundle_channle_id_listfragment";
     public static final String BUNDLE_KEY_CATALOG = "BUNDLE_KEY_CATALOG";
 
     @InjectView(R.id.swiperefreshlayout)
@@ -64,7 +66,7 @@ public abstract class BaseListFragment<T extends Parcelable> extends BaseFragmen
 
     protected int mCurrentPage = 0;
 
-    protected int mCatalog = 1;
+    protected ChannelItem channelItem;
     // 错误信息
     protected Result mResult;
 
@@ -82,7 +84,9 @@ public abstract class BaseListFragment<T extends Parcelable> extends BaseFragmen
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         if (args != null) {
-            mCatalog = args.getInt(BUNDLE_KEY_CATALOG, 0);
+            channelItem = (ChannelItem) args.getSerializable(BUNDLE_CHANNLE_ID);
+            String tag = channelItem != null ? channelItem.getChannelId() : "";
+            mHandler.setTag(tag);
         }
     }
 
@@ -335,7 +339,7 @@ public abstract class BaseListFragment<T extends Parcelable> extends BaseFragmen
                 if (mState == STATE_REFRESH) {
                     onRefreshNetworkSuccess();
                 }
-                executeParserTask(responseBytes);
+                executeParserTask(responseBytes, (String) getTag());
             }
         }
 
@@ -467,9 +471,9 @@ public abstract class BaseListFragment<T extends Parcelable> extends BaseFragmen
         }
     }
 
-    private void executeParserTask(byte[] data) {
+    private void executeParserTask(byte[] data, String channleId) {
         cancelParserTask();
-        mParserTask = new ParserTask(data);
+        mParserTask = new ParserTask(data, channleId);
         mParserTask.execute();
     }
 
@@ -481,18 +485,19 @@ public abstract class BaseListFragment<T extends Parcelable> extends BaseFragmen
     }
 
     class ParserTask extends AsyncTask<Void, Void, List<T>> {
-
+        private final String channelId;
         private final byte[] reponseData;
         private boolean parserError;
         // private List<T> list;
 
-        public ParserTask(byte[] data) {
+        public ParserTask(byte[] data, String channelId) {
             this.reponseData = data;
+            this.channelId = channelId;
         }
 
         @Override
         protected List<T> doInBackground(Void... params) {
-            List<NewModle> list = null;
+            List<NewsListBean> list = null;
             try {
                /* ListEntity<T> data = parseList(new ByteArrayInputStream(
                         reponseData));
@@ -500,9 +505,11 @@ public abstract class BaseListFragment<T extends Parcelable> extends BaseFragmen
                 list = data.getList();*/
 
                 if (reponseData != null) {
-                    list =
-                            NewListJson.instance(getActivity()).readJsonNewModles(new String(reponseData),
-                                    Url.TopId);
+//                    list =
+//                            NewListJson.instance(getActivity()).readJsonNewModles(new String(reponseData),
+//                                    Url.TopId);
+
+                    list = new JsonUtils<NewsListBean>().json2ObjectList(new String(reponseData), NewsListBean.class, channelId);
 
                 }
             } catch (Exception e) {
@@ -591,4 +598,11 @@ public abstract class BaseListFragment<T extends Parcelable> extends BaseFragmen
             tvTitle.setTextColor(AppContext.getInstance().getResources().getColor(ThemeSwitchUtils.getTitleReadedColor()));
         }
     }
+
+    public String getChannelId() {
+
+        return channelItem.getChannelId();
+    }
+
+
 }

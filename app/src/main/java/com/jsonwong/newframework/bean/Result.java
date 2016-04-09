@@ -1,6 +1,5 @@
 package com.jsonwong.newframework.bean;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 import java.io.Serializable;
 
@@ -11,14 +10,11 @@ import java.io.Serializable;
  * @version 1.0
  * @created 2012-3-21
  */
-@SuppressWarnings("serial")
-@XStreamAlias("result")
 public class Result implements Serializable {
 
-    @XStreamAlias("errorCode")
+
     private int errorCode;
 
-    @XStreamAlias("errorMessage")
     private String errorMessage;
 
     public boolean OK() {

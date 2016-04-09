@@ -12,7 +12,7 @@ import com.jsonwong.newframework.AppContext;
 import com.jsonwong.newframework.adapter.ViewPageFragmentAdapter;
 import com.jsonwong.newframework.adapter.ViewPageInfo;
 import com.jsonwong.newframework.base.BaseViewPagerFragment;
-import com.jsonwong.newframework.fragment.NewsFragment;
+import com.jsonwong.newframework.fragment.NewsListFragment;
 import com.jsonwong.newframework.interf.OnTabReselectListener;
 import com.jsonwong.newframework.rxbus.RxBus;
 
@@ -23,7 +23,7 @@ import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- * 资讯viewpager页面
+ * 新闻viewpager页面
  *
  * @author FireAnt（http://my.oschina.net/LittleDY）
  * @created 2014年9月25日 下午2:21:52
@@ -47,8 +47,8 @@ public class NewsViewPagerFragment extends BaseViewPagerFragment implements
         //初始化Tabs
         if (currentList.size() == 0) {
             for (int i = 0; i < list.size(); i++) {
-                adapter.addTab(list.get(i).getName(), list.get(i).getChannelId() + "", NewsFragment.class,
-                        getBundle(1), i);
+                adapter.addTab(list.get(i).getName(), list.get(i).getChannelId() + "", NewsListFragment.class,
+                        getBundle(list.get(i)), i);
             }
         } else {
 
@@ -77,8 +77,8 @@ public class NewsViewPagerFragment extends BaseViewPagerFragment implements
                         if (currentList.get(j).tag.equals(list.get(i).getChannelId())) {
                             isAdd = true;
 
-                            adapter.addTab(list.get(i).getName(), list.get(i).getChannelId() + "", NewsFragment.class,
-                                    getBundle(i), i, adapter.getItem(j).getView());
+                            adapter.addTab(list.get(i).getName(), list.get(i).getChannelId() + "", NewsListFragment.class,
+                                    getBundle(list.get(i)), i, adapter.getItem(j).getView());
                             showPosition = i;
                             adapter.remove(j + 1);
                             break;
@@ -87,7 +87,7 @@ public class NewsViewPagerFragment extends BaseViewPagerFragment implements
                     //当currentTabs不存在需要添加的tab，直接添加（需要inflate）
                     if (!isAdd) {
                         showPosition = i;
-                        adapter.addTab(list.get(i).getName(), list.get(i).getChannelId() + "", NewsFragment.class,
+                        adapter.addTab(list.get(i).getName(), list.get(i).getChannelId() + "", NewsListFragment.class,
                                 getBundle(i), i);
                     }
                 }
@@ -95,7 +95,7 @@ public class NewsViewPagerFragment extends BaseViewPagerFragment implements
                 //当新的tabs大于currentTabs ，直接添加
                 if (i > currentList.size() - 1) {
                     showPosition = i;
-                    adapter.addTab(list.get(i).getName(), list.get(i).getChannelId() + "", NewsFragment.class,
+                    adapter.addTab(list.get(i).getName(), list.get(i).getChannelId() + "", NewsListFragment.class,
                             getBundle(i), i);
                 }
 
@@ -123,7 +123,7 @@ public class NewsViewPagerFragment extends BaseViewPagerFragment implements
 //                    }
 //
 //
-//                    adapter.addTab(list.get(i).getName(), list.get(i).getChannelId() + "", NewsFragment.class,
+//                    adapter.addTab(list.get(i).getName(), list.get(i).getChannelId() + "", NewsListFragment.class,
 //                            getBundle(1), i);
 //                }
 //                //需要删除重复Item
@@ -160,14 +160,13 @@ public class NewsViewPagerFragment extends BaseViewPagerFragment implements
     }
 
     /**
-     * 基类会根据不同的catalog展示相应的数据
+     * 基类会根据不同的channlItem展示相应的数据
      *
-     * @param catalog 要显示的数据类别
      * @return
      */
-    private Bundle getBundle(String catalog) {
+    private Bundle getBundle(ChannelItem channelItem) {
         Bundle bundle = new Bundle();
-        // bundle.putString(BlogFragment.BUNDLE_BLOG_TYPE, catalog);
+        bundle.putSerializable(NewsListFragment.BUNDLE_CHANNLE_ID, channelItem);
         return bundle;
     }
 

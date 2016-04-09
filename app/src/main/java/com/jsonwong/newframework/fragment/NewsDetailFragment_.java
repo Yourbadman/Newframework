@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jsonwong.newframework.R;
 import com.jsonwong.newframework.base.BaseFragment;
-import com.jsonwong.newframework.bean.NewModle;
+import com.jsonwong.newframework.bean.NewsListBean;
 import com.jsonwong.newframework.ui.DetailActivity;
 import com.jsonwong.newframework.util.StringUtils;
 
@@ -45,7 +45,7 @@ public class NewsDetailFragment_ extends BaseFragment {
 
     ContentLoadingProgressBar mPbLoading;
 
-    private NewModle newModle;
+    private NewsListBean newModle;
 
     @Override
     protected int getLayoutId() {

@@ -12,16 +12,18 @@ public class ChannelItem implements java.io.Serializable {
     private Integer orderId;
     private Integer selected;
     private String channelId;
+    private Integer urlType;
 
     public ChannelItem() {
     }
 
-    public ChannelItem(Integer id, String name, Integer orderId, Integer selected, String channelId) {
+    public ChannelItem(Integer id, String name, Integer orderId, Integer selected, String channelId, Integer urlType) {
         this.id = id;
         this.name = name;
         this.orderId = orderId;
         this.selected = selected;
         this.channelId = channelId;
+        this.urlType = urlType;
     }
 
     public Integer getId() {
@@ -64,6 +66,14 @@ public class ChannelItem implements java.io.Serializable {
 
     public void setChannelId(String channelId) {
         this.channelId = channelId;
+    }
+
+    public Integer getUrlType() {
+        return urlType;
+    }
+
+    public void setUrlType(Integer urlType) {
+        this.urlType = urlType;
     }
 
 }

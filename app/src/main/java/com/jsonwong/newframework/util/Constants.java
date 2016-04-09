@@ -8,6 +8,18 @@ package com.jsonwong.newframework.util;
  */
 
 public class Constants {
+
+    //已读列表
+    public final static String PREF_READED_NEWS_LIST = "readed_news_list.pref";
+    public final static int CATALOG_ALL = 1;
+    public final static int CATALOG_INTEGRATION = 2;
+    public final static int CATALOG_SOFTWARE = 3;
+
+    public final static int CATALOG_WEEK = 4;
+    public final static int CATALOG_MONTH = 5;
+
+
+
     public static final String DB_NAME = "note_db";
     public static final String CHANNEL_SELETED = "1";
     public static final String CHANNEL_NOT_SELETED = "0";

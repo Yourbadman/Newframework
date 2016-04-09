@@ -9,7 +9,7 @@ import de.greenrobot.daogenerator.ToMany;
 public class MyClass {
 
     //数据库的版本
-    private static final int VERSION = 1;
+    private static final int VERSION = 2;
     //要生成数据库存储对象的路径，此路径比较重要，如果写错在执行的时候容易出现找不到路径的异常
     private static final String PATH = "../Newframework/app/src/main/java-gen";
 
@@ -39,6 +39,7 @@ public class MyClass {
         note.addIntProperty("orderId");
         note.addIntProperty("selected");
         note.addStringProperty("channelId");
+        note.addIntProperty("urlType");
     }
 
     private static void addNote(Schema schema) {

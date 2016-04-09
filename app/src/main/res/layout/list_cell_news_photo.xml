@@ -26,6 +26,7 @@
             android:layout_margin="@dimen/space_2"
             android:layout_weight="0.33"
             fresco:placeholderImage="@drawable/widget_today_icon"
+            android:visibility="gone"
             fresco:viewAspectRatio="1.33" />
 
         <com.facebook.drawee.view.SimpleDraweeView
@@ -34,6 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space_2"
             android:layout_weight="0.33"
+            android:visibility="gone"
             fresco:placeholderImage="@drawable/widget_today_icon"
             fresco:viewAspectRatio="1.33" />
 
@@ -43,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space_2"
             android:layout_weight="0.33"
+
             fresco:placeholderImage="@drawable/widget_today_icon"
             fresco:viewAspectRatio="1.33" />
     </LinearLayout>

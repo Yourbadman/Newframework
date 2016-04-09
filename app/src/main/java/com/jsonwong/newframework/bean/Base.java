@@ -1,7 +1,5 @@
 package com.jsonwong.newframework.bean;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-
 import java.io.Serializable;
 
 /**

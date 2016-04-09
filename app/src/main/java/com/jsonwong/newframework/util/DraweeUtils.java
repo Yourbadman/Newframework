@@ -8,6 +8,7 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.jsonwong.newframework.R;
+import com.jsonwong.newframework.bean.NewsListBean;
 
 /**
  * Fresco 帮助Utils
@@ -18,6 +19,7 @@ public class DraweeUtils {
 
     /**
      * 设置图片的圆角效果
+     *
      * @param simpleDraweeView
      * @param rate
      */
@@ -44,5 +46,17 @@ public class DraweeUtils {
                         .build())
                 .setOldController(simpleDraweeView.getController())
                 .build();
+    }
+
+    public static void setImageUrl(SimpleDraweeView photo_2, String url) {
+
+        if (StringUtils.isEmpty(url))
+            return;
+        Uri uri = Uri.parse(url);
+        if (uri == null)
+            return;
+        photo_2.setImageURI(uri);
+
+
     }
 }
