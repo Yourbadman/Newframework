@@ -14,15 +14,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.json.greendao.ChannelItem;
+import com.jsonwong.greendao.ChannelItem;
+import com.jsonwong.modle.ListEntity;
+import com.jsonwong.modle.NewsListBean;
 import com.jsonwong.newframework.AppContext;
 import com.jsonwong.newframework.R;
 import com.jsonwong.newframework.adapter.base.ListBaseAdapter;
-import com.jsonwong.newframework.bean.ListEntity;
-import com.jsonwong.newframework.bean.NewsListBean;
-import com.jsonwong.newframework.bean.Result;
 import com.jsonwong.newframework.cache.CacheManager;
 import com.jsonwong.newframework.ui.empty.EmptyLayout;
 import com.jsonwong.newframework.util.JsonUtils;
@@ -35,9 +32,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.InjectView;
 import cz.msebera.android.httpclient.Header;
@@ -68,7 +63,7 @@ public abstract class BaseListFragment<T extends Parcelable> extends BaseFragmen
 
     protected ChannelItem channelItem;
     // 错误信息
-    protected Result mResult;
+    //protected Result mResult;
 
     private AsyncTask<String, Void, ListEntity<T>> mCacheTask;
     private ParserTask mParserTask;
@@ -358,11 +353,11 @@ public abstract class BaseListFragment<T extends Parcelable> extends BaseFragmen
             data = new ArrayList<T>();
         }
 
-        if (mResult != null && !mResult.OK()) {
-            AppContext.showToast(mResult.getErrorMessage());
-            // 注销登陆，密码已经修改，cookie，失效了
-            // AppContext.getInstance().Logout();
-        }
+//        if (mResult != null && !mResult.OK()) {
+//            AppContext.showToast(mResult.getErrorMessage());
+//            // 注销登陆，密码已经修改，cookie，失效了
+//            // AppContext.getInstance().Logout();
+//        }
 
         mErrorLayout.setErrorType(EmptyLayout.HIDE_LAYOUT);
         if (mCurrentPage == 0) {

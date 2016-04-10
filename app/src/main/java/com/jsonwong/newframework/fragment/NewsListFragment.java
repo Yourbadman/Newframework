@@ -3,15 +3,13 @@ package com.jsonwong.newframework.fragment;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.jsonwong.modle.ListEntity;
+import com.jsonwong.modle.NewsListBean;
 import com.jsonwong.newframework.adapter.NewsListAdapter;
-import com.jsonwong.newframework.adapter.base.ListBaseAdapter;
 import com.jsonwong.newframework.api.remote.OSChinaApi;
 import com.jsonwong.newframework.base.BaseListFragment;
-import com.jsonwong.newframework.bean.ListEntity;
-import com.jsonwong.newframework.bean.NewsListBean;
 import com.jsonwong.newframework.http.Url;
 import com.jsonwong.newframework.interf.OnTabReselectListener;
-import com.jsonwong.newframework.ui.empty.EmptyLayout;
 import com.jsonwong.newframework.util.Constants;
 import com.jsonwong.newframework.util.UIHelper;
 

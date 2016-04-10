@@ -9,11 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.jsonwong.modle.NewsListBean;
 import com.jsonwong.newframework.AppContext;
 import com.jsonwong.newframework.R;
 import com.jsonwong.newframework.adapter.base.ListBaseAdapter;
-import com.jsonwong.newframework.bean.NewsListBean;
-import com.jsonwong.newframework.http.Url;
 import com.jsonwong.newframework.util.Constants;
 import com.jsonwong.newframework.util.DraweeUtils;
 import com.jsonwong.newframework.util.StringUtils;

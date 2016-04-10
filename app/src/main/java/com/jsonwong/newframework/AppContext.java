@@ -65,6 +65,7 @@ public class AppContext extends BaseApplication {
 
         return _rxBus;
     }
+
     @Override
     public void onCreate() {
         super.onCreate();

@@ -28,6 +28,7 @@ import com.jsonwong.newframework.R;
 import com.jsonwong.newframework.cache.DataCleanManager;
 import com.jsonwong.newframework.interf.BaseViewInterface;
 import com.jsonwong.newframework.interf.OnTabReselectListener;
+import com.jsonwong.newframework.util.DoubleClickExitHelper;
 import com.jsonwong.newframework.widget.MyFragmentTabHost;
 
 import butterknife.ButterKnife;

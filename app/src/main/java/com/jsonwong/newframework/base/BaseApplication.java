@@ -17,9 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.json.greendao.ChannelItem;
-import com.json.greendao.DaoMaster;
-import com.json.greendao.DaoSession;
+import com.jsonwong.greendao.ChannelItem;
+import com.jsonwong.greendao.DaoMaster;
+import com.jsonwong.greendao.DaoSession;
 import com.jsonwong.newframework.R;
 import com.jsonwong.newframework.db.service.ChannelManageService;
 import com.jsonwong.newframework.util.Constants;

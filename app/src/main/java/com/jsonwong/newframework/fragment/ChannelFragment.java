@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.json.greendao.ChannelItem;
+import com.jsonwong.greendao.ChannelItem;
 import com.jsonwong.newframework.AppContext;
 import com.jsonwong.newframework.R;
 import com.jsonwong.newframework.adapter.DragAdapter;

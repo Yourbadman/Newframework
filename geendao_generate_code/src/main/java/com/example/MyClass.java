@@ -11,11 +11,11 @@ public class MyClass {
     //数据库的版本
     private static final int VERSION = 2;
     //要生成数据库存储对象的路径，此路径比较重要，如果写错在执行的时候容易出现找不到路径的异常
-    private static final String PATH = "../Newframework/app/src/main/java-gen";
+    private static final String PATH = "../Newframework/modle/src/main/green-dao";
 
     public static void main(String[] args) throws Exception {
 
-        Schema schema = new Schema(VERSION, "com.json.greendao");
+        Schema schema = new Schema(VERSION, "com.jsonwong.greendao");
 
         //添加频道
         addChannelItem(schema, "ChannelItem");

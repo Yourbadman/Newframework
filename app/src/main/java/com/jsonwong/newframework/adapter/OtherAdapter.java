@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.json.greendao.ChannelItem;
+import com.jsonwong.greendao.ChannelItem;
 import com.jsonwong.newframework.R;
 
 import java.util.ArrayList;

@@ -10,7 +10,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ZoomButtonsController;
 
-import com.jsonwong.newframework.bean.NewsListBean;
+import com.jsonwong.modle.NewsListBean;
 import com.jsonwong.newframework.ui.DetailActivity;
 
 /**

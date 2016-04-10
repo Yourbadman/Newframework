@@ -1,4 +1,4 @@
-package com.jsonwong.newframework.bean;
+package com.jsonwong.modle;
 
 
 import java.io.Serializable;

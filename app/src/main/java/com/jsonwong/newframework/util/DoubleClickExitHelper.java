@@ -1,4 +1,4 @@
-package com.jsonwong.newframework.ui;
+package com.jsonwong.newframework.util;
 
 import android.app.Activity;
 import android.os.Handler;

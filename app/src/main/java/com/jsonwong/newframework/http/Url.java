@@ -1,10 +1,8 @@
 
 package com.jsonwong.newframework.http;
 
-import com.json.greendao.ChannelItem;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.jsonwong.greendao.ChannelItem;
 
 public class Url {
 

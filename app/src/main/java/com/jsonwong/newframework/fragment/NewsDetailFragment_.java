@@ -12,9 +12,9 @@ import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.jsonwong.modle.NewsListBean;
 import com.jsonwong.newframework.R;
 import com.jsonwong.newframework.base.BaseFragment;
-import com.jsonwong.newframework.bean.NewsListBean;
 import com.jsonwong.newframework.ui.DetailActivity;
 import com.jsonwong.newframework.util.StringUtils;
 

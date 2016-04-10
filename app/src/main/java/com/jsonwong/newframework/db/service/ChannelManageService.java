@@ -2,9 +2,9 @@ package com.jsonwong.newframework.db.service;
 
 import android.content.Context;
 
-import com.json.greendao.ChannelItem;
-import com.json.greendao.ChannelItemDao;
-import com.json.greendao.DaoSession;
+import com.jsonwong.greendao.ChannelItem;
+import com.jsonwong.greendao.ChannelItemDao;
+import com.jsonwong.greendao.DaoSession;
 import com.jsonwong.newframework.base.BaseApplication;
 import com.jsonwong.newframework.http.Url;
 

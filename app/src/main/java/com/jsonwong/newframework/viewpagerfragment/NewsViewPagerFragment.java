@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
 
-import com.json.greendao.ChannelItem;
+import com.jsonwong.greendao.ChannelItem;
 import com.jsonwong.newframework.AppContext;
 import com.jsonwong.newframework.adapter.ViewPageFragmentAdapter;
 import com.jsonwong.newframework.adapter.ViewPageInfo;

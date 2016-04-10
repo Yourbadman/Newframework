@@ -1,10 +1,10 @@
 
-package com.jsonwong.newframework.bean;
+package com.jsonwong.modle;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.jsonwong.newframework.base.BaseModle;
+import com.jsonwong.modle.base.BaseModle;
 
 import java.util.List;
 
@@ -71,7 +71,7 @@ public class ImagesModle extends BaseModle implements Parcelable {
         this.imgList = in.createStringArrayList();
     }
 
-    public static final Parcelable.Creator<ImagesModle> CREATOR = new Parcelable.Creator<ImagesModle>() {
+    public static final Creator<ImagesModle> CREATOR = new Creator<ImagesModle>() {
         @Override
         public ImagesModle createFromParcel(Parcel source) {
             return new ImagesModle(source);
