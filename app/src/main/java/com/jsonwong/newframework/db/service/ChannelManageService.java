@@ -6,7 +6,7 @@ import com.jsonwong.greendao.ChannelItem;
 import com.jsonwong.greendao.ChannelItemDao;
 import com.jsonwong.greendao.DaoSession;
 import com.jsonwong.newframework.base.BaseApplication;
-import com.jsonwong.newframework.http.Url;
+import com.jsonwong.newframework.api.http.Url;
 
 import java.util.ArrayList;
 import java.util.List;

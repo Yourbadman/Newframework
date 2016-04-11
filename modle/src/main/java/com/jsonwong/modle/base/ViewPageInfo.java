@@ -1,4 +1,4 @@
-package com.jsonwong.newframework.adapter;
+package com.jsonwong.modle.base;
 
 import android.os.Bundle;
 

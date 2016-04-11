@@ -10,7 +10,6 @@ import android.view.View;
 import com.jsonwong.greendao.ChannelItem;
 import com.jsonwong.newframework.AppContext;
 import com.jsonwong.newframework.adapter.ViewPageFragmentAdapter;
-import com.jsonwong.newframework.adapter.ViewPageInfo;
 import com.jsonwong.newframework.base.BaseViewPagerFragment;
 import com.jsonwong.newframework.fragment.NewsListFragment;
 import com.jsonwong.newframework.interf.OnTabReselectListener;

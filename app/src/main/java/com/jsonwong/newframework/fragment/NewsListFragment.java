@@ -8,7 +8,7 @@ import com.jsonwong.modle.NewsListBean;
 import com.jsonwong.newframework.adapter.NewsListAdapter;
 import com.jsonwong.newframework.api.remote.OSChinaApi;
 import com.jsonwong.newframework.base.BaseListFragment;
-import com.jsonwong.newframework.http.Url;
+import com.jsonwong.newframework.api.http.Url;
 import com.jsonwong.newframework.interf.OnTabReselectListener;
 import com.jsonwong.newframework.util.Constants;
 import com.jsonwong.newframework.util.UIHelper;

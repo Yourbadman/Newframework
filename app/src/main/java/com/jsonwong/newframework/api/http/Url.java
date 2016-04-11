@@ -1,5 +1,5 @@
 
-package com.jsonwong.newframework.http;
+package com.jsonwong.newframework.api.http;
 
 
 import com.jsonwong.greendao.ChannelItem;
