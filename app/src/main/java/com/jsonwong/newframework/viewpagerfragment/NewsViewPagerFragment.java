@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.jsonwong.greendao.ChannelItem;
+import com.jsonwong.modle.base.ViewPageInfo;
 import com.jsonwong.newframework.AppContext;
 import com.jsonwong.newframework.adapter.ViewPageFragmentAdapter;
 import com.jsonwong.newframework.base.BaseViewPagerFragment;

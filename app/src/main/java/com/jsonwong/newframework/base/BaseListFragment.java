@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.jsonwong.greendao.ChannelItem;
 import com.jsonwong.modle.ListEntity;
 import com.jsonwong.modle.NewsListBean;
+import com.jsonwong.modle.base.BaseModle;
 import com.jsonwong.newframework.AppContext;
 import com.jsonwong.newframework.R;
 import com.jsonwong.newframework.adapter.base.ListBaseAdapter;

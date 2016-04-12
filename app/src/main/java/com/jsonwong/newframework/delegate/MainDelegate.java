@@ -33,7 +33,6 @@ public class MainDelegate extends AppDelegate implements NavigationDrawerFragmen
     Toolbar mToolbar;
     public MyFragmentTabHost mTabHost;
     private CharSequence mTitle;
-    private NavigationDrawerFragment mNavigationDrawerFragment;
     private AppCompatActivity activity;
 
     @Override
@@ -61,14 +60,10 @@ public class MainDelegate extends AppDelegate implements NavigationDrawerFragmen
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         mTabHost = get(android.R.id.tabhost);
+        mDrawerLayout = get(R.id.drawer_layout);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment) activity.getSupportFragmentManager()
-                .findFragmentById(R.id.navigation_drawer);
         mTitle = activity.getTitle();
 
-        // Set up the drawer.
-        mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
-                (DrawerLayout) get(R.id.drawer_layout));
 
         mTabHost.setup(activity, activity.getSupportFragmentManager(), R.id.realtabcontent);
         if (Build.VERSION.SDK_INT > 10) {
@@ -84,7 +79,7 @@ public class MainDelegate extends AppDelegate implements NavigationDrawerFragmen
 
 
         if (AppContext.isFristStart()) {
-            mNavigationDrawerFragment.openDrawerMenu();
+            changeMenuState();
             DataCleanManager.cleanInternalCache(AppContext.getInstance());
             AppContext.setFristStart(false);
         }
@@ -200,7 +195,6 @@ public class MainDelegate extends AppDelegate implements NavigationDrawerFragmen
         activity.supportInvalidateOptionsMenu();
     }
 
-//    /**
 //     * 显示Toolbar的退出tip
 //     */
 //    public void showExitTip() {

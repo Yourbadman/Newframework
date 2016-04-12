@@ -2,13 +2,11 @@ package news.jsonwong.com.mvpframework.base;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
-import news.jsonwong.com.mvpframework.R;
 import news.jsonwong.com.mvpframework.presenter.ActivityPresenter;
 import news.jsonwong.com.mvpframework.view.IDelegate;
 
@@ -37,12 +35,18 @@ public abstract class BaseFrameActivity<T extends IDelegate> extends ActivityPre
 
     @Override
     protected void initToolbar() {
-        Toolbar toolbar = viewDelegate.getToolbar();
-        if (toolbar == null) {
-            toolbar = (Toolbar) View.inflate(this, R.layout.base_toolbar, null);
-            rootView.addView(toolbar, 0);
-        }
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = viewDelegate.getToolbar();
+//        if (toolbar == null) {
+//            toolbar = (Toolbar) View.inflate(this, R.layout.base_toolbar, null);
+//            rootView.addView(toolbar, 0);
+//        }
+//        if (toolbar != null) {
+//
+//            supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+//            setSupportActionBar(toolbar);
+//        }
+
+
     }
 
     @Override

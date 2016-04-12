@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.jsonwong.modle.base.ViewPageInfo;
 import com.jsonwong.newframework.R;
 import com.jsonwong.newframework.widget.PagerSlidingTabStrip;
 

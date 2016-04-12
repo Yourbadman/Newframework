@@ -1,11 +1,21 @@
 package com.jsonwong.newframework.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.jsonwong.modle.base.Event;
+import com.jsonwong.newframework.AppConfig;
+import com.jsonwong.newframework.AppContext;
+import com.jsonwong.newframework.AppManager;
+import com.jsonwong.newframework.R;
 import com.jsonwong.newframework.delegate.MainDelegate;
+import com.jsonwong.newframework.ui.ChannelActivity;
+import com.jsonwong.newframework.util.DoubleClickExitHelper;
 import com.kymjs.rxvolley.rx.RxBus;
 
 import news.jsonwong.com.mvpframework.base.BaseFrameActivity;
@@ -26,15 +36,7 @@ public class MainActivity extends BaseFrameActivity<MainDelegate> {
 
     private Subscription rxBusSubscript;
 
-    private boolean isOnKeyBacking;
-//    private Handler mMainLoopHandler = new Handler(Looper.getMainLooper());
-//    private Runnable onBackTimeRunnable = new Runnable() {
-//        @Override
-//        public void run() {
-//            isOnKeyBacking = false;
-//            viewDelegate.cancleExit();
-//        }
-//    };
+    private DoubleClickExitHelper mDoubleClickExit;
 
 
     @Override
@@ -42,35 +44,17 @@ public class MainActivity extends BaseFrameActivity<MainDelegate> {
         return MainDelegate.class;
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
 
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-
-            if (viewDelegate.menuIsOpen()) {
-                viewDelegate.changeMenuState();
-            } else if (isOnKeyBacking) {
-               // mMainLoopHandler.removeCallbacks(onBackTimeRunnable);
-                isOnKeyBacking = false;
-                finish();
-            } else {
-                isOnKeyBacking = true;
-               // viewDelegate.showExitTip();
-               // mMainLoopHandler.postDelayed(onBackTimeRunnable, 2000);
-            }
-            return true;
-
-        } else {
-            return super.onKeyDown(keyCode, event);
-
-        }
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppManager.getAppManager().addActivity(this);
+        mDoubleClickExit = new DoubleClickExitHelper(this);
+
 //        getSupportFragmentManager().beginTransaction()
 //                .replace(R.id.main_content, content1, content1.getClass().getName())
 //                .commit();
+
 
         rxBusSubscript = RxBus.getDefault().take(Event.class)
                 .subscribe(new Action1<Event>() {
@@ -85,12 +69,6 @@ public class MainActivity extends BaseFrameActivity<MainDelegate> {
                 });
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (rxBusSubscript != null && rxBusSubscript.isUnsubscribed())
-            rxBusSubscript.unsubscribe();
-    }
 
     /**
      * 根据MainSlidMenu点击选择不同的响应
@@ -118,4 +96,64 @@ public class MainActivity extends BaseFrameActivity<MainDelegate> {
         }
         viewDelegate.changeMenuState();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity_menu, menu);
+        if (!viewDelegate.menuIsOpen()) {
+            restoreActionBar();
+            return true;
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.search:
+                //UIHelper.showSimpleBack(this, SimpleBackPage.SEARCH);
+                Intent intent = new Intent(this, ChannelActivity.class);
+                startActivity(intent);
+                break;
+
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * 监听返回--是否退出程序
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (viewDelegate.menuIsOpen()) {
+            viewDelegate.changeMenuState();
+            return false;
+        }
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            // 是否退出应用
+            if (AppContext.get(AppConfig.KEY_DOUBLE_CLICK_EXIT, true)) {
+                return mDoubleClickExit.onKeyDown(keyCode, event);
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (rxBusSubscript != null && rxBusSubscript.isUnsubscribed())
+            rxBusSubscript.unsubscribe();
+    }
+
+    public void restoreActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setTitle("");
+    }
+
+
 }
