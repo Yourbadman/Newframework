@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar
-    android:id="@+id/toolbar"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/base_titlebar_height"
-    android:background="@color/base_colorPrimary"
-    android:paddingTop="@dimen/base_toolbar_padding_top"
+    android:layout_height="?actionBarSize"
+    android:background="?colorPrimary"
+    android:theme="@style/AppTheme"
+    app:navigationIcon="@drawable/abc_ic_ab_back_mtrl_am_alpha"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    app:title="view_pager" />

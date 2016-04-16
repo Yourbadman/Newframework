@@ -1,4 +1,4 @@
-package com.jsonwong.newframework.delegate;
+package com.jsonwong.newframework.mvp.delegate;
 
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -22,12 +22,12 @@ import com.jsonwong.newframework.ui.MainTab;
 import com.jsonwong.newframework.ui.NavigationDrawerFragment;
 import com.jsonwong.newframework.widget.MyFragmentTabHost;
 
-import news.jsonwong.com.mvpframework.view.AppDelegate;
+import news.jsonwong.com.mvpframework.view.ViewDelegate;
 
 /**
  * @author kymjs (http://www.kymjs.com/) on 11/6/15.
  */
-public class MainDelegate extends AppDelegate implements NavigationDrawerFragment.NavigationDrawerCallbacks, TabHost.OnTabChangeListener, View.OnTouchListener {
+public class MainDelegate extends ViewDelegate implements NavigationDrawerFragment.NavigationDrawerCallbacks, TabHost.OnTabChangeListener, View.OnTouchListener {
 
     DrawerLayout mDrawerLayout;
     Toolbar mToolbar;
@@ -43,11 +43,10 @@ public class MainDelegate extends AppDelegate implements NavigationDrawerFragmen
     @Override
     public Toolbar getToolbar() {
         mToolbar = get(R.id.toolbar);
-        if (mToolbar == null) {
-            throw new NullPointerException("Must include Toolbar and define @+id/toolbar." +
-                    " You can get @layout/base_toolbar");
-        }
-        return mToolbar;
+//        if (mToolbar == null) {
+//            toolbar = (Toolbar) View.inflate(this, R.layout.base_toolbar,null);
+//        }
+        return get(R.id.toolbar);
     }
 
     @Override

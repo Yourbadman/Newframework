@@ -13,12 +13,12 @@ import com.jsonwong.newframework.AppConfig;
 import com.jsonwong.newframework.AppContext;
 import com.jsonwong.newframework.AppManager;
 import com.jsonwong.newframework.R;
+import com.jsonwong.newframework.base.mvp.BaseFrameActivity;
 import com.jsonwong.newframework.delegate.MainDelegate;
 import com.jsonwong.newframework.ui.ChannelActivity;
 import com.jsonwong.newframework.util.DoubleClickExitHelper;
 import com.kymjs.rxvolley.rx.RxBus;
 
-import news.jsonwong.com.mvpframework.base.BaseFrameActivity;
 import rx.Subscription;
 import rx.functions.Action1;
 

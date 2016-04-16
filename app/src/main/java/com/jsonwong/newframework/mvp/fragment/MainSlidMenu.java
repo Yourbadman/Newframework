@@ -1,4 +1,4 @@
-package com.jsonwong.newframework.fragment;
+package com.jsonwong.newframework.mvp.fragment;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -7,7 +7,7 @@ import android.view.View;
 import com.jsonwong.modle.base.Event;
 import com.jsonwong.newframework.R;
 import com.jsonwong.newframework.activity.MainActivity;
-import com.jsonwong.newframework.delegate.MainSlidMenuDelegate;
+import com.jsonwong.newframework.mvp.delegate.MainSlidMenuDelegate;
 import com.kymjs.rxvolley.rx.RxBus;
 
 import news.jsonwong.com.mvpframework.presenter.FragmentPresenter;

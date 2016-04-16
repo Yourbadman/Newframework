@@ -1,4 +1,4 @@
-package com.jsonwong.newframework.fragment;
+package com.jsonwong.newframework.mvp.demo;
 
 import android.view.View;
 import android.widget.AdapterView;

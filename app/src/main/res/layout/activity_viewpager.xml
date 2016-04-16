@@ -4,14 +4,14 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="?colorPrimary"
-        android:theme="@style/AppTheme"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="view_pager"
-        app:navigationIcon="@drawable/abc_ic_ab_back_mtrl_am_alpha"/>
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?actionBarSize"
+    android:background="?colorPrimary"
+    android:theme="@style/AppTheme"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:title="view_pager"
+    app:navigationIcon="@drawable/abc_ic_ab_back_mtrl_am_alpha"/>
 
 
     <com.jsonwong.newframework.ui.demo.MultiTouchViewPager

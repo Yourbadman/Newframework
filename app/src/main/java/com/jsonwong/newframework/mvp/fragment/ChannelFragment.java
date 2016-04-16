@@ -1,4 +1,4 @@
-package com.jsonwong.newframework.fragment;
+package com.jsonwong.newframework.mvp.fragment;
 
 import android.content.Context;
 import android.graphics.Bitmap;

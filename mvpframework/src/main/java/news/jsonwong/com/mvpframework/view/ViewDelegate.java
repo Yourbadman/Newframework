@@ -30,7 +30,7 @@ import android.widget.Toast;
  *
  * @author kymjs (http://www.kymjs.com/) on 10/23/15.
  */
-public abstract class AppDelegate implements IDelegate {
+public abstract class ViewDelegate implements IDelegate {
     protected final SparseArray<View> mViews = new SparseArray<View>();
 
     protected View rootView;
