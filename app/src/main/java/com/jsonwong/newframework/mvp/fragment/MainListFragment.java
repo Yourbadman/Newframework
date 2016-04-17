@@ -51,14 +51,17 @@ public abstract class MainListFragment<T> extends MainFragment<PullListDelegate>
             super.onSuccess(t);
             Loger.debug("===列表网络请求:" + t);
             if (viewDelegate != null && viewDelegate.mEmptyLayout != null) {
-                if (tempDatas == null || tempDatas.isEmpty() || adapter == null || adapter
-                        .getItemCount() < 1) {
+                if (tempDatas == null || tempDatas.isEmpty() || adapter == null) {
                     viewDelegate.mEmptyLayout.setErrorType(EmptyLayout.NODATA);
+                } else if (adapter
+                        .getItemCount() > 1 && tempDatas.size() == 0) {
+                    viewDelegate.mEmptyLayout.setErrorType(EmptyLayout.NO_MORE_DATE);
                 } else {
                     viewDelegate.mEmptyLayout.dismiss();
                     adapter.refresh(tempDatas);
                     datas = tempDatas;
                 }
+
             }
 
         }

@@ -22,7 +22,7 @@ public class EmptyLayout extends LinearLayout implements
     public static final int NODATA = 3;
     public static final int NODATA_ENABLE_CLICK = 5;
     public static final int NO_LOGIN = 6;
-
+    public static final int NO_MORE_DATE = 7;
     private ProgressBar animProgress;
     private boolean clickEnable = true;
     private final Context context;
@@ -119,7 +119,8 @@ public class EmptyLayout extends LinearLayout implements
         // tv.setTextColor(SkinsUtil.getColor(getContext(), "textcolor05"));
     }
 
-    public void setDayNight(boolean flag) {}
+    public void setDayNight(boolean flag) {
+    }
 
     public void setErrorMessage(String msg) {
         tv.setText(msg);
@@ -129,7 +130,6 @@ public class EmptyLayout extends LinearLayout implements
      * 新添设置背景
      *
      * @author 火蚁 2015-1-27 下午2:14:00
-     *
      */
     public void setErrorImag(int imgResource) {
         try {
@@ -141,51 +141,59 @@ public class EmptyLayout extends LinearLayout implements
     public void setErrorType(int i) {
         setVisibility(View.VISIBLE);
         switch (i) {
-        case NETWORK_ERROR:
-            mErrorState = NETWORK_ERROR;
-            // img.setBackgroundDrawable(SkinsUtil.getDrawable(context,"pagefailed_bg"));
-            if (TDevice.hasInternet()) {
-                tv.setText(R.string.error_view_load_error_click_to_refresh);
-                img.setBackgroundResource(R.drawable.pagefailed_bg);
-            } else {
-                tv.setText(R.string.error_view_network_error_click_to_refresh);
-                img.setBackgroundResource(R.drawable.page_icon_network);
-            }
-            img.setVisibility(View.VISIBLE);
-            animProgress.setVisibility(View.GONE);
-            clickEnable = true;
-            break;
-        case NETWORK_LOADING:
-            mErrorState = NETWORK_LOADING;
-            // animProgress.setBackgroundDrawable(SkinsUtil.getDrawable(context,"loadingpage_bg"));
-            animProgress.setVisibility(View.VISIBLE);
-            img.setVisibility(View.GONE);
-            tv.setText(R.string.error_view_loading);
-            clickEnable = false;
-            break;
-        case NODATA:
-            mErrorState = NODATA;
-            // img.setBackgroundDrawable(SkinsUtil.getDrawable(context,"page_icon_empty"));
-            img.setBackgroundResource(R.drawable.page_icon_empty);
-            img.setVisibility(View.VISIBLE);
-            animProgress.setVisibility(View.GONE);
-            setTvNoDataContent();
-            clickEnable = true;
-            break;
-        case HIDE_LAYOUT:
-            setVisibility(View.GONE);
-            break;
-        case NODATA_ENABLE_CLICK:
-            mErrorState = NODATA_ENABLE_CLICK;
-            img.setBackgroundResource(R.drawable.page_icon_empty);
-            // img.setBackgroundDrawable(SkinsUtil.getDrawable(context,"page_icon_empty"));
-            img.setVisibility(View.VISIBLE);
-            animProgress.setVisibility(View.GONE);
-            setTvNoDataContent();
-            clickEnable = true;
-            break;
-        default:
-            break;
+            case NETWORK_ERROR:
+                mErrorState = NETWORK_ERROR;
+                // img.setBackgroundDrawable(SkinsUtil.getDrawable(context,"pagefailed_bg"));
+                if (TDevice.hasInternet()) {
+                    tv.setText(R.string.error_view_load_error_click_to_refresh);
+                    img.setBackgroundResource(R.drawable.pagefailed_bg);
+                } else {
+                    tv.setText(R.string.error_view_network_error_click_to_refresh);
+                    img.setBackgroundResource(R.drawable.page_icon_network);
+                }
+                img.setVisibility(View.VISIBLE);
+                animProgress.setVisibility(View.GONE);
+                clickEnable = true;
+                break;
+            case NETWORK_LOADING:
+                mErrorState = NETWORK_LOADING;
+                // animProgress.setBackgroundDrawable(SkinsUtil.getDrawable(context,"loadingpage_bg"));
+                animProgress.setVisibility(View.VISIBLE);
+                img.setVisibility(View.GONE);
+                tv.setText(R.string.error_view_loading);
+                clickEnable = false;
+                break;
+            case NODATA:
+                mErrorState = NODATA;
+                // img.setBackgroundDrawable(SkinsUtil.getDrawable(context,"page_icon_empty"));
+                img.setBackgroundResource(R.drawable.page_icon_empty);
+                img.setVisibility(View.VISIBLE);
+                animProgress.setVisibility(View.GONE);
+                setTvNoDataContent();
+                clickEnable = true;
+                break;
+            case HIDE_LAYOUT:
+                setVisibility(View.GONE);
+                break;
+            case NODATA_ENABLE_CLICK:
+                mErrorState = NODATA_ENABLE_CLICK;
+                img.setBackgroundResource(R.drawable.page_icon_empty);
+                // img.setBackgroundDrawable(SkinsUtil.getDrawable(context,"page_icon_empty"));
+                img.setVisibility(View.VISIBLE);
+                animProgress.setVisibility(View.GONE);
+                setTvNoDataContent();
+                clickEnable = true;
+                break;
+            case NO_MORE_DATE:
+                mErrorState = NO_MORE_DATE;
+                // animProgress.setBackgroundDrawable(SkinsUtil.getDrawable(context,"loadingpage_bg"));
+                animProgress.setVisibility(View.GONE);
+                img.setVisibility(View.GONE);
+                tv.setText(R.string.loading_no_more);
+                clickEnable = false;
+                break;
+            default:
+                break;
         }
     }
 

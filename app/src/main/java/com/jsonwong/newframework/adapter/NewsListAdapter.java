@@ -74,7 +74,7 @@ public class NewsListAdapter extends BasePullUpRecyclerAdapter<NewsListBean> {
                 DraweeUtils.setImageUrl((SimpleDraweeView) holder.getView(R.id.photo_1), news.getImgsrc());
                 setLayotuParams((SimpleDraweeView) holder.getView(R.id.photo_1), 0.5f);
 
-                DraweeUtils.setImageUrl((SimpleDraweeView) holder.getView(R.id.photo_2), news.getImgsrc());
+                DraweeUtils.setImageUrl((SimpleDraweeView) holder.getView(R.id.photo_2), images.get(0).getImgsrc());
                 setLayotuParams((SimpleDraweeView) holder.getView(R.id.photo_2), 0.5f);
 
             }
@@ -83,10 +83,10 @@ public class NewsListAdapter extends BasePullUpRecyclerAdapter<NewsListBean> {
                 DraweeUtils.setImageUrl((SimpleDraweeView) holder.getView(R.id.photo_1), news.getImgsrc());
                 setLayotuParams((SimpleDraweeView) holder.getView(R.id.photo_1), 0.33f);
 
-                DraweeUtils.setImageUrl((SimpleDraweeView) holder.getView(R.id.photo_2), news.getImgsrc());
+                DraweeUtils.setImageUrl((SimpleDraweeView) holder.getView(R.id.photo_2), images.get(0).getImgsrc());
                 setLayotuParams((SimpleDraweeView) holder.getView(R.id.photo_2), 0.33f);
 
-                DraweeUtils.setImageUrl((SimpleDraweeView) holder.getView(R.id.photo_3), news.getImgsrc());
+                DraweeUtils.setImageUrl((SimpleDraweeView) holder.getView(R.id.photo_3), images.get(1).getImgsrc());
                 setLayotuParams((SimpleDraweeView) holder.getView(R.id.photo_3), 0.33f);
 
             }
