@@ -1,7 +1,8 @@
 package com.jsonwong.newframework.base.mvp.presenter;
 
-import com.kymjs.frame.presenter.FragmentPresenter;
-import com.kymjs.frame.view.IDelegate;
+
+import news.jsonwong.com.mvpframework.presenter.FragmentPresenter;
+import news.jsonwong.com.mvpframework.view.IDelegate;
 
 /**
  * 主界面内容Fragment

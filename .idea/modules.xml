@@ -3,10 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Newframework.iml" filepath="$PROJECT_DIR$/Newframework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/adapter/adapter.iml" filepath="$PROJECT_DIR$/adapter/adapter.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/geendao_generate_code/geendao_generate_code.iml" filepath="$PROJECT_DIR$/geendao_generate_code/geendao_generate_code.iml" />
       <module fileurl="file://$PROJECT_DIR$/modle/modle.iml" filepath="$PROJECT_DIR$/modle/modle.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mvpframework/mvpframework.iml" filepath="$PROJECT_DIR$/mvpframework/mvpframework.iml" />
       <module fileurl="file://$PROJECT_DIR$/mvpframework/mvpframework.iml" filepath="$PROJECT_DIR$/mvpframework/mvpframework.iml" />
     </modules>
   </component>

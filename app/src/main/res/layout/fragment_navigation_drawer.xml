@@ -6,8 +6,9 @@
 	
     <com.jsonwong.newframework.widget.CustomerScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:fillViewport="false">
         
         <include layout="@layout/fragment_navigation_drawer_items"/>
         

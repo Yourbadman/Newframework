@@ -9,14 +9,14 @@ import android.widget.FrameLayout;
 
 import com.jsonwong.newframework.R;
 
-import news.jsonwong.com.mvpframework.view.AppDelegate;
+import news.jsonwong.com.mvpframework.view.ViewDelegate;
 
 
 /**
  *
  * @author kymjs (http://www.kymjs.com/) on 11/27/15.
  */
-public class BaseListDelegate extends AppDelegate {
+public class BaseListDelegate extends ViewDelegate {
 
     protected RecyclerView mRecyclerView;
 

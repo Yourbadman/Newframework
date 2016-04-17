@@ -1,37 +1,35 @@
 
 package com.jsonwong.newframework.mvp.fragment;
 
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.View;
 
 import com.jsonwong.greendao.ChannelItem;
 import com.jsonwong.modle.base.ViewPageInfo;
 import com.jsonwong.newframework.AppContext;
 import com.jsonwong.newframework.adapter.ViewPageFragmentAdapter;
-import com.jsonwong.newframework.base.BaseViewPagerFragment;
-import com.jsonwong.newframework.mvp.demo.NewsListFragment;
 import com.jsonwong.newframework.interf.OnTabReselectListener;
-import com.jsonwong.newframework.rxbus.RxBus;
+import com.jsonwong.newframework.mvp.delegate.ViewPaperDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.functions.Action1;
-import rx.subscriptions.CompositeSubscription;
+import news.jsonwong.com.mvpframework.presenter.FragmentPresenter;
 
 /**
  * 新闻viewpager页面
  *
- * @author FireAnt（http://my.oschina.net/LittleDY）
- * @created 2014年9月25日 下午2:21:52
+ * @author jsonwong (http://www.jsonwong.cn)
+ *         create at 2016/4/16 23:44
  */
-public class NewsViewPagerFragment extends BaseViewPagerFragment implements
+public class NewsViewPagerFragment extends FragmentPresenter<ViewPaperDelegate> implements
         OnTabReselectListener {
+    protected ViewPageFragmentAdapter mTabsAdapter;
 
-    @Override
+
     protected void onSetupTabAdapter(ViewPageFragmentAdapter adapter, Object userList) {
         if (adapter == null)
             return;
@@ -148,17 +146,21 @@ public class NewsViewPagerFragment extends BaseViewPagerFragment implements
 
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mTabsAdapter = new ViewPageFragmentAdapter(getChildFragmentManager(),
+                viewDelegate.mTabStrip, viewDelegate.mViewPager);
+        onSetupTabAdapter(mTabsAdapter, null);
+    }
+
+
     private Bundle getBundle(int newType) {
         Bundle bundle = new Bundle();
         //   bundle.putInt(BaseListFragment.BUNDLE_KEY_CATALOG, newType);
         return bundle;
 
 
-    }
-
-    @Override
-    protected void setScreenPageLimit() {
-        //mViewPager.setOffscreenPageLimit(3);
     }
 
     /**
@@ -172,25 +174,11 @@ public class NewsViewPagerFragment extends BaseViewPagerFragment implements
         return bundle;
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public void initView(View view) {
-
-    }
-
-    @Override
-    public void initData() {
-
-    }
 
     @Override
     public void onTabReselect() {
         try {
-            int currentIndex = mViewPager.getCurrentItem();
+            int currentIndex = viewDelegate.mViewPager.getCurrentItem();
             Fragment currentFragment = getChildFragmentManager().getFragments()
                     .get(currentIndex);
             if (currentFragment != null
@@ -203,38 +191,9 @@ public class NewsViewPagerFragment extends BaseViewPagerFragment implements
     }
 
 
-    /**
-     * 以下Rxjava测试RxBus
-     */
-
-    private RxBus _rxBus;
-    private CompositeSubscription _subscriptions;
-
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        _rxBus = AppContext.getInstance().getRxBusSingleton();
-        _rxBus.toObserverable().subscribe(new Action1<Object>() {
-            @Override
-            public void call(Object dataI) {
-
-                onSetupTabAdapter(mTabsAdapter, dataI);
-            }
-        });
-    }
-
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        _subscriptions.clear();
-//    }
-
-    @Override
-    public void onCreate(Bundle bundle) {
-        super.onCreate(bundle);
-        Log.i("Demo", "onCreate");
-
-
+    protected Class<ViewPaperDelegate> getDelegateClass() {
+        return ViewPaperDelegate.class;
     }
 
     @Override

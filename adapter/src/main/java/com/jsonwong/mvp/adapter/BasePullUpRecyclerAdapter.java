@@ -7,7 +7,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.kymjs.frame.adapter.widget.FooterView;
+import com.jsonwong.mvp.widget.FooterView;
 
 import java.util.Collection;
 

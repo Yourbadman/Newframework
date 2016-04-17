@@ -12,7 +12,7 @@ import com.jsonwong.modle.base.ViewPageInfo;
 import com.jsonwong.newframework.AppContext;
 import com.jsonwong.newframework.adapter.ViewPageFragmentAdapter;
 import com.jsonwong.newframework.base.BaseViewPagerFragment;
-import com.jsonwong.newframework.fragment.NewsListFragment;
+import com.jsonwong.newframework.mvp.demo.NewsListFragment;
 import com.jsonwong.newframework.interf.OnTabReselectListener;
 import com.jsonwong.newframework.rxbus.RxBus;
 
@@ -152,6 +152,8 @@ public class NewsViewPagerFragment extends BaseViewPagerFragment implements
         Bundle bundle = new Bundle();
         //   bundle.putInt(BaseListFragment.BUNDLE_KEY_CATALOG, newType);
         return bundle;
+
+
     }
 
     @Override

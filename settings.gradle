@@ -1,1 +1,1 @@
-include ':modle', ':app', ':geendao_generate_code', ':mvpframework'
+include ':modle', ':app', ':geendao_generate_code', ':mvpframework', ':adapter'

@@ -7,7 +7,7 @@ import android.view.View;
 import com.jsonwong.newframework.R;
 import com.jsonwong.newframework.base.BaseActivity;
 import com.jsonwong.newframework.base.BaseFragment;
-import com.jsonwong.newframework.fragment.ChannelFragment;
+import com.jsonwong.newframework.mvp.fragment.ChannelFragment;
 
 /**
  * 频道管理

@@ -1,7 +1,7 @@
 package com.jsonwong.newframework.ui;
 
 import com.jsonwong.newframework.R;
-import com.jsonwong.newframework.viewpagerfragment.NewsViewPagerFragment;
+import com.jsonwong.newframework.mvp.fragment.NewsViewPagerFragment;
 
 public enum MainTab {
 

@@ -2,17 +2,19 @@ package com.jsonwong.newframework.mvp.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.jsonwong.modle.NewsListBean;
 import com.jsonwong.mvp.adapter.BasePullUpRecyclerAdapter;
 import com.jsonwong.mvp.adapter.RecyclerHolder;
 import com.jsonwong.newframework.R;
+import com.jsonwong.newframework.interf.OnTabReselectListener;
+import com.jsonwong.newframework.util.JsonUtils;
 import com.kymjs.rxvolley.RxVolley;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import rx.Observable;
 import rx.Subscription;
@@ -27,14 +29,15 @@ import rx.schedulers.Schedulers;
  * @author jsonwong (http://www.jsonwong.cn)
  *         create at 2016/4/16 23:03
  */
-public class NewsListFragment extends MainListFragment<NewsListBean> {
-
+public class NewsListFragment extends MainListFragment<NewsListBean> implements
+        OnTabReselectListener {
+    public static final String BUNDLE_CHANNLE_ID = "bundle_channle_id_listfragment";
     private Subscription cacheSubscript;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        cacheSubscript = Observable.just(RxVolley.getCache(Api.BLOG_LIST))
+        cacheSubscript = Observable.just(RxVolley.getCache(""))
                 .filter(new Func1<byte[], Boolean>() {
                     @Override
                     public Boolean call(byte[] cache) {
@@ -64,13 +67,22 @@ public class NewsListFragment extends MainListFragment<NewsListBean> {
     }
 
     @Override
-    protected ArrayList<NewsListBean> parserInAsync(byte[] t) {
-        // return XmlUtil.toBean(BlogList.class, t).getChannel().getItemArray();
+    protected ArrayList<NewsListBean> parserInAsync(byte[] reponseData) {
+        List<NewsListBean> list = Collections.EMPTY_LIST;
+        if (reponseData != null) {
+//                    list =
+//                            NewListJson.instance(getActivity()).readJsonNewModles(new String(reponseData),
+//                                    Url.TopId);
+
+            list = new JsonUtils<NewsListBean>().json2ObjectList(new String(reponseData), NewsListBean.class, "");
+
+        }
+        return (ArrayList) list;
     }
 
     @Override
     protected BasePullUpRecyclerAdapter<NewsListBean> getAdapter() {
-        return new BasePullUpRecyclerAdapter<NewsListBean>(recyclerView, datas, R.layout.item_blog) {
+        return new BasePullUpRecyclerAdapter<NewsListBean>(recyclerView, datas, R.layout.list_cell_news_base) {
 //            final View.OnClickListener imageClickListener = new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
@@ -106,7 +118,7 @@ public class NewsListFragment extends MainListFragment<NewsListBean> {
 
     @Override
     public void doRequest() {
-        new RxVolley.Builder().url(Api.BLOG_LIST)
+        new RxVolley.Builder().url("")
                 .contentType(RxVolley.Method.GET)
                 .cacheTime(600)
                 .callback(callBack)
@@ -124,5 +136,10 @@ public class NewsListFragment extends MainListFragment<NewsListBean> {
     public void onItemClick(View view, Object data, int position) {
         NewsListBean blog = ((NewsListBean) data);
         // BlogDetailActivity.goinActivity(getActivity(), blog.getLink(), blog.getTitle());
+    }
+
+    @Override
+    public void onTabReselect() {
+        doRequest();
     }
 }

@@ -40,12 +40,13 @@
 
 
         </FrameLayout>
+
     </LinearLayout>
 
     <!-- 左侧侧滑菜单 -->
     <fragment
         android:id="@+id/navigation_drawer"
-        android:name="com.jsonwong.newframework.fragment.MainSlidMenu"
+        android:name="com.jsonwong.newframework.mvp.fragment.MainSlidMenu"
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"

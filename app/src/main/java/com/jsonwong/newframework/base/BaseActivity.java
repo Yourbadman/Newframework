@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,14 +16,11 @@ import com.jsonwong.newframework.AppManager;
 import com.jsonwong.newframework.R;
 import com.jsonwong.newframework.base.swipeback.SwipeBackActivity;
 import com.jsonwong.newframework.base.swipeback.SwipeBackLayout;
-import com.jsonwong.newframework.fragment.NewsDetailFragment_;
 import com.jsonwong.newframework.interf.BaseViewInterface;
-import com.jsonwong.newframework.ui.DetailActivity;
 import com.jsonwong.newframework.ui.dialog.CommonToast;
 import com.jsonwong.newframework.ui.dialog.DialogControl;
 import com.jsonwong.newframework.util.DialogHelp;
 import com.jsonwong.newframework.util.StringUtils;
-import com.jsonwong.newframework.util.SwipebackUtils;
 import com.jsonwong.newframework.util.TDevice;
 
 
