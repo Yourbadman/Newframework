@@ -13,13 +13,16 @@ import java.util.List;
 
 /**
  * RecyclerView的万能适配器，适配任何一个RecyclerView
+ * <p/>
+ * 能够同时适配多套视图
  *
- * @author kymjs (http://www.kymjs.com/) on 8/27/15.
+ * @author jsonwong (http://www.jsonwong.cn)
+ *         create at 2016/4/17 10:46
  */
 public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerHolder> {
 
     protected List<T> realDatas;
-    protected final int mItemLayoutId;
+    protected final int[] mItemLayoutId;
     protected Context cxt;
     private OnItemClickListener listener;
 
@@ -27,7 +30,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
         void onItemClick(View view, Object data, int position);
     }
 
-    public BaseRecyclerAdapter(RecyclerView v, Collection<T> datas, int itemLayoutId) {
+    public BaseRecyclerAdapter(RecyclerView v, Collection<T> datas, @Nullable int... itemLayoutId) {
         if (datas == null) {
             realDatas = new ArrayList<>();
         } else if (datas instanceof List) {
@@ -47,10 +50,13 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
      */
     public abstract void convert(RecyclerHolder holder, T item, int position);
 
+
+
+
     @Override
     public RecyclerHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(cxt);
-        View root = inflater.inflate(mItemLayoutId, parent, false);
+        View root = inflater.inflate(mItemLayoutId[viewType], parent, false);
         return new RecyclerHolder(root);
     }
 

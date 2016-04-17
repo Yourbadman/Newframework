@@ -17,8 +17,7 @@ public class RecyclerHolder extends RecyclerView.ViewHolder {
 
     public RecyclerHolder(View itemView) {
         super(itemView);
-        //一般不会超过8个吧
-        this.mViews = new SparseArray<>(8);
+        this.mViews = new SparseArray<>(15);
     }
 
     public SparseArray<View> getAllView() {
@@ -50,7 +49,34 @@ public class RecyclerHolder extends RecyclerView.ViewHolder {
      */
     public RecyclerHolder setText(int viewId, String text) {
         TextView view = getView(viewId);
+
         view.setText(text);
+        return this;
+    }
+
+    /**
+     * 为TextView设置颜色
+     *
+     * @param viewId
+     * @param color
+     * @return
+     */
+    public RecyclerHolder setTextColor(int viewId, int color) {
+        TextView view = getView(viewId);
+        view.setTextColor(color);
+        return this;
+    }
+
+    /**
+     * 为TextView设置是否可见
+     *
+     * @param viewId
+     * @param showType
+     * @return
+     */
+    public RecyclerHolder setVisibility(int viewId, int showType) {
+        TextView view = getView(viewId);
+        view.setVisibility(showType);
         return this;
     }
 

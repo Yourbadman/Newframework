@@ -5,7 +5,7 @@ import android.widget.AdapterView;
 
 import com.jsonwong.modle.ListEntity;
 import com.jsonwong.modle.NewsListBean;
-import com.jsonwong.newframework.adapter.NewsListAdapter;
+import com.jsonwong.newframework.adapter.demo.NewsListAdapter;
 import com.jsonwong.newframework.api.remote.OSChinaApi;
 import com.jsonwong.newframework.base.BaseListFragment;
 import com.jsonwong.newframework.api.http.Url;

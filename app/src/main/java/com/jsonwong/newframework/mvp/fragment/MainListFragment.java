@@ -60,6 +60,7 @@ public abstract class MainListFragment<T> extends MainFragment<PullListDelegate>
                     datas = tempDatas;
                 }
             }
+
         }
 
         @Override

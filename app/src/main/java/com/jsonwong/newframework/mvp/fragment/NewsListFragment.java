@@ -3,14 +3,22 @@ package com.jsonwong.newframework.mvp.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.TextView;
 
+import com.jsonwong.greendao.ChannelItem;
 import com.jsonwong.modle.NewsListBean;
 import com.jsonwong.mvp.adapter.BasePullUpRecyclerAdapter;
-import com.jsonwong.mvp.adapter.RecyclerHolder;
+import com.jsonwong.newframework.AppContext;
 import com.jsonwong.newframework.R;
+import com.jsonwong.newframework.adapter.NewsListAdapter;
+import com.jsonwong.newframework.api.http.Url;
 import com.jsonwong.newframework.interf.OnTabReselectListener;
+import com.jsonwong.newframework.util.Constants;
 import com.jsonwong.newframework.util.JsonUtils;
+import com.jsonwong.newframework.util.ThemeSwitchUtils;
+import com.jsonwong.newframework.util.UIHelper;
 import com.kymjs.rxvolley.RxVolley;
+import com.kymjs.rxvolley.client.HttpParams;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,11 +41,20 @@ public class NewsListFragment extends MainListFragment<NewsListBean> implements
         OnTabReselectListener {
     public static final String BUNDLE_CHANNLE_ID = "bundle_channle_id_listfragment";
     private Subscription cacheSubscript;
+    private ChannelItem channelItem;
+    private int index = 0;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        cacheSubscript = Observable.just(RxVolley.getCache(""))
+
+        Bundle args = getArguments();
+        if (args != null) {
+            channelItem = (ChannelItem) args.getSerializable(BUNDLE_CHANNLE_ID);
+//            String tag = channelItem != null ? channelItem.getChannelId() : "";
+
+        }
+        cacheSubscript = Observable.just(RxVolley.getCache(Url.getNewUrl(channelItem, index + "")))
                 .filter(new Func1<byte[], Boolean>() {
                     @Override
                     public Boolean call(byte[] cache) {
@@ -73,8 +90,9 @@ public class NewsListFragment extends MainListFragment<NewsListBean> implements
 //                    list =
 //                            NewListJson.instance(getActivity()).readJsonNewModles(new String(reponseData),
 //                                    Url.TopId);
-
-            list = new JsonUtils<NewsListBean>().json2ObjectList(new String(reponseData), NewsListBean.class, "");
+            // http://c.m.163.com/nc/article/headline/T1348647853363/0-20.html
+            //  http://c.m.163.com/nc/article/list/http://c.m.163.com/nc/article/list/T1348649580692/0-20.html/0-20.html
+            list = new JsonUtils<NewsListBean>().json2ObjectList(new String(reponseData), NewsListBean.class, "T1348647853363");
 
         }
         return (ArrayList) list;
@@ -82,47 +100,28 @@ public class NewsListFragment extends MainListFragment<NewsListBean> implements
 
     @Override
     protected BasePullUpRecyclerAdapter<NewsListBean> getAdapter() {
-        return new BasePullUpRecyclerAdapter<NewsListBean>(recyclerView, datas, R.layout.list_cell_news_base) {
-//            final View.OnClickListener imageClickListener = new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    KJGalleryActivity.toGallery(getActivity(), (String) v.getTag());
-//                }
-//            };
+        return new NewsListAdapter(recyclerView, datas, R.layout.list_cell_news_base, R.layout.list_cell_news_photo);
+    }
 
-            @Override
-            public void convert(RecyclerHolder holder, final NewsListBean item, int position) {
-//                holder.setText(R.id.item_blog_tv_title, item.getTitle());
-//                holder.setText(R.id.item_blog_tv_description, item.getDescription());
-//                holder.setText(R.id.item_blog_tv_author, item.getAuthor());
-//                holder.setText(R.id.item_blog_tv_date, item.getPubDate());
-//                if (TextUtils.isEmpty(item.getRecommend())) {
-//                    holder.getView(R.id.item_blog_tip_recommend).setVisibility(View.GONE);
-//                } else {
-//                    holder.getView(R.id.item_blog_tip_recommend).setVisibility(View.VISIBLE);
-//                }
-//
-//                ImageView imageView = holder.getView(R.id.item_blog_img);
-//                String imageUrl = item.getImage().trim();
-//                if (TextUtils.isEmpty(imageUrl)) {
-//                    imageView.setVisibility(View.GONE);
-//                } else {
-//                    imageView.setVisibility(View.VISIBLE);
-//                    new BitmapCore.Builder().url(imageUrl).view(imageView).doTask();
-//                    //在列表点击图片就直接进详情了,没必要进图片预览(布局文件中已取消焦点)
-////                    imageView.setOnClickListener(imageClickListener);
-//                }
-            }
-        };
+    @Override
+    public void onBottom() {
+        // doRequest(datas.size() / 20);
+        adapter.setState(BasePullUpRecyclerAdapter.STATE_LOADING);
     }
 
     @Override
     public void doRequest() {
-        new RxVolley.Builder().url("")
+        new RxVolley.Builder().url(Url.getNewUrl(channelItem, index + ""))
                 .contentType(RxVolley.Method.GET)
                 .cacheTime(600)
                 .callback(callBack)
                 .doTask();
+        index = index + 20;
+    }
+
+    public void doRefresh() {
+        index = 0;
+        doRequest();
     }
 
     @Override
@@ -134,12 +133,29 @@ public class NewsListFragment extends MainListFragment<NewsListBean> implements
 
     @Override
     public void onItemClick(View view, Object data, int position) {
-        NewsListBean blog = ((NewsListBean) data);
-        // BlogDetailActivity.goinActivity(getActivity(), blog.getLink(), blog.getTitle());
+        NewsListBean news = ((NewsListBean) data);
+        if (news != null) {
+            UIHelper.showNewsDetail(view.getContext(), news);
+            // 放入已读列表
+            AppContext.putReadedPostList(Constants.PREF_READED_NEWS_LIST, news.getDocid()
+                    + "", "true");
+            TextView tvTitle = viewDelegate.get(R.id.tv_title);
+            if (tvTitle != null) {
+                tvTitle.setTextColor(AppContext.getInstance().getResources().getColor(ThemeSwitchUtils.getTitleReadedColor()));
+            }
+
+        }
+    }
+
+    private HttpParams getHttpParams(int index) {
+        HttpParams params = new HttpParams();
+        params.put("pageIndex", index);
+        params.put("pageSize", 20);
+        return params;
     }
 
     @Override
     public void onTabReselect() {
-        doRequest();
+        doRefresh();
     }
 }

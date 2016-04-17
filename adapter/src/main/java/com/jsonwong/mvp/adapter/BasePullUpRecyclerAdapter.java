@@ -13,12 +13,15 @@ import java.util.Collection;
 
 /**
  * 让RecyclerView滚动到底部具有自动加载更多的功能
+ * <p/>
+ * tips:
  *
- * @author kymjs (http://www.kymjs.com/) on 10/4/15.
+ * @author jsonwong (http://www.jsonwong.cn)
+ *         create at 2016/4/17 11:22
  */
 public abstract class BasePullUpRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
 
-    public static final int TYPE_FOOTER = 0;
+    public static final int TYPE_FOOTER = 0x0015;
     public static final int TYPE_ITEM = 1;
 
     public static final int STATE_INVISIBLE = 0;
@@ -31,18 +34,25 @@ public abstract class BasePullUpRecyclerAdapter<T> extends BaseRecyclerAdapter<T
     protected FooterView footerView;
     private OnPullUpListener pullUpListener;
 
-    public BasePullUpRecyclerAdapter(RecyclerView v, Collection<T> datas, int itemLayoutId) {
+    public BasePullUpRecyclerAdapter(RecyclerView v, Collection<T> datas, int... itemLayoutId) {
         super(v, datas, itemLayoutId);
         v.addOnScrollListener(new BasePullUpScrollListener());
         footerView = new FooterView(cxt);
     }
+
+    /**
+     * 获取item的自定义布局，
+     *
+     * @return {@link BasePullUpRecyclerAdapter}中的itemLayoutId的数组的index
+     */
+    public abstract int getCustomItemLayoutByPosition(int position);
 
     @Override
     public int getItemViewType(int position) {
         if (position == getItemCount() - 1) {
             return TYPE_FOOTER;
         } else {
-            return TYPE_ITEM;
+            return getCustomItemLayoutByPosition(position);
 
         }
     }
@@ -54,13 +64,12 @@ public abstract class BasePullUpRecyclerAdapter<T> extends BaseRecyclerAdapter<T
 
     @Override
     public RecyclerHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == TYPE_ITEM) {
-            return super.onCreateViewHolder(parent, viewType);
-        } else if (viewType == TYPE_FOOTER) {
+        if (viewType == TYPE_FOOTER) {
             refreshFooterView();
             return new RecyclerHolder(footerView);
+        } else {
+            return super.onCreateViewHolder(parent, viewType);
         }
-        return null;
     }
 
     @Override
