@@ -8,17 +8,21 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.jsonwong.newframework.R;
+import com.jsonwong.newframework.ui.empty.EmptyLayout;
 
 import news.jsonwong.com.mvpframework.view.ViewDelegate;
 
 
 /**
+ * RecyclerView的List基类
  *
- * @author kymjs (http://www.kymjs.com/) on 11/27/15.
+ * @author jsonwong (http://www.jsonwong.cn)
+ *         create at 2016/4/18 21:40
  */
 public class BaseListDelegate extends ViewDelegate {
 
     protected RecyclerView mRecyclerView;
+    public EmptyLayout mEmptyLayout;
 
     @Override
     public int getRootLayoutId() {
@@ -38,19 +42,32 @@ public class BaseListDelegate extends ViewDelegate {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false));
+
+
+        mEmptyLayout = new EmptyLayout(getActivity());
+        setEmptyLayout(mEmptyLayout);
+
+
     }
 
     protected void setEmptyLayout(View emptyLayout) {
+        mEmptyLayout.removeAllViews();
         FrameLayout layout = get(R.id.emptyLayoutParent);
         layout.addView(emptyLayout);
     }
 
+    /**
+     * 设置正在刷新的状态
+     */
     public void setSwipeRefreshLoadingState() {
         SwipeRefreshLayout refreshLayout = get(R.id.swiperefreshlayout);
         refreshLayout.setRefreshing(true);
         refreshLayout.setEnabled(false);
     }
 
+    /**
+     * 设置完成刷新状态
+     */
     public void setSwipeRefreshLoadedState() {
         SwipeRefreshLayout refreshLayout = get(R.id.swiperefreshlayout);
         refreshLayout.setRefreshing(false);
@@ -61,4 +78,8 @@ public class BaseListDelegate extends ViewDelegate {
         return (LinearLayoutManager) mRecyclerView.getLayoutManager();
     }
 
+    public void setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener l) {
+        SwipeRefreshLayout swipeRefreshLayout = get(R.id.swiperefreshlayout);
+        swipeRefreshLayout.setOnRefreshListener(l);
+    }
 }

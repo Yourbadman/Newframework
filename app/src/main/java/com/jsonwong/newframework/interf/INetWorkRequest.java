@@ -5,6 +5,6 @@ package com.jsonwong.newframework.interf;
  *
  * @author kymjs (http://www.kymjs.com/) on 12/3/15.
  */
-public interface IRequestVo {
+public interface INetWorkRequest {
     void doRequest();
 }

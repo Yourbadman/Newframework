@@ -21,6 +21,7 @@ import com.jsonwong.newframework.util.ThemeSwitchUtils;
 import com.jsonwong.newframework.util.UIHelper;
 import com.kymjs.rxvolley.RxVolley;
 import com.kymjs.rxvolley.client.HttpParams;
+import com.kymjs.rxvolley.rx.Result;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,11 +61,49 @@ public class NewsListFragment extends MainListFragment<NewsListBean> implements
     }
 
     @Override
+    public void onBottom() {
+        super.onBottom();
+        doRequest();
+        //
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
 
-        cacheSubscript = Observable.just(RxVolley.getCache(Url.getNewUrl(channelItem, index + "")))
+     doRequest();
+    }
+
+    @Override
+    protected ArrayList<NewsListBean> parserInAsync(byte[] reponseData) {
+        List<NewsListBean> list = Collections.EMPTY_LIST;
+        if (reponseData != null) {
+//                    list =
+//                            NewListJson.instance(getActivity()).readJsonNewModles(new String(reponseData),
+//                                    Url.TopId);
+            // http://c.m.163.com/nc/article/headline/T1348647853363/0-20.html
+            //  http://c.m.163.com/nc/article/list/http://c.m.163.com/nc/article/list/T1348649580692/0-20.html/0-20.html
+            list = new JsonUtils<NewsListBean>().json2ObjectList(new String(reponseData), NewsListBean.class, channelItem.getChannelId());
+            if (list.size() != 0)
+                index += 20;
+        }
+        return (ArrayList) list;
+    }
+
+    @Override
+    protected BasePullUpRecyclerAdapter<NewsListBean> getAdapter() {
+        return new NewsListAdapter(recyclerView, datas, R.layout.list_cell_news_base, R.layout.list_cell_news_photo);
+    }
+
+
+    @Override
+    public void doRequest() {
+
+        Observable<Result> observable= new RxVolley.Builder().url(Url.getNewUrl(channelItem, index + ""))
+                .contentType(RxVolley.Method.GET)
+                .cacheTime(600).getResult();
+        cacheSubscript = observable.just(RxVolley.getCache(Url.getNewUrl(channelItem, index + "")))
                 .filter(new Func1<byte[], Boolean>() {
                     @Override
                     public Boolean call(byte[] cache) {
@@ -91,42 +130,8 @@ public class NewsListFragment extends MainListFragment<NewsListBean> implements
                     public void call(Throwable throwable) {
                     }
                 });
-    }
 
-    @Override
-    protected ArrayList<NewsListBean> parserInAsync(byte[] reponseData) {
-        List<NewsListBean> list = Collections.EMPTY_LIST;
-        if (reponseData != null) {
-//                    list =
-//                            NewListJson.instance(getActivity()).readJsonNewModles(new String(reponseData),
-//                                    Url.TopId);
-            // http://c.m.163.com/nc/article/headline/T1348647853363/0-20.html
-            //  http://c.m.163.com/nc/article/list/http://c.m.163.com/nc/article/list/T1348649580692/0-20.html/0-20.html
-            list = new JsonUtils<NewsListBean>().json2ObjectList(new String(reponseData), NewsListBean.class, channelItem.getChannelId());
-            if (list.size() != 0)
-                index += 20;
-        }
-        return (ArrayList) list;
-    }
 
-    @Override
-    protected BasePullUpRecyclerAdapter<NewsListBean> getAdapter() {
-        return new NewsListAdapter(recyclerView, datas, R.layout.list_cell_news_base, R.layout.list_cell_news_photo);
-    }
-
-    @Override
-    public void onBottom() {
-        doRequest();
-        adapter.setState(BasePullUpRecyclerAdapter.STATE_LOADING);
-    }
-
-    @Override
-    public void doRequest() {
-        new RxVolley.Builder().url(Url.getNewUrl(channelItem, index + ""))
-                .contentType(RxVolley.Method.GET)
-                .cacheTime(600)
-                .callback(callBack)
-                .doTask();
 
     }
 

@@ -8,33 +8,36 @@ import android.view.View;
 import com.jsonwong.mvp.adapter.BasePullUpRecyclerAdapter;
 import com.jsonwong.mvp.adapter.BaseRecyclerAdapter;
 import com.jsonwong.newframework.R;
-import com.jsonwong.newframework.base.mvp.presenter.MainFragment;
-import com.jsonwong.newframework.mvp.delegate.PullListDelegate;
-import com.jsonwong.newframework.interf.IRequestVo;
+import com.jsonwong.newframework.base.mvp.delegate.BaseListDelegate;
+import com.jsonwong.newframework.interf.INetWorkRequest;
 import com.jsonwong.newframework.ui.empty.EmptyLayout;
 import com.kymjs.rxvolley.client.HttpCallback;
 import com.kymjs.rxvolley.toolbox.Loger;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import news.jsonwong.com.mvpframework.presenter.FragmentPresenter;
 
 /**
- * 下拉列表界面基类
+ * 下拉列表的Preserter类，处理页面逻辑
  *
  * @author kymjs (http://www.kymjs.com/) on 12/3/15.
  */
-public abstract class MainListFragment<T> extends MainFragment<PullListDelegate> implements
-        SwipeRefreshLayout.OnRefreshListener, IRequestVo, BaseRecyclerAdapter.OnItemClickListener {
+public abstract class MainListFragment<T> extends FragmentPresenter<BaseListDelegate> implements
+        SwipeRefreshLayout.OnRefreshListener, INetWorkRequest, BaseRecyclerAdapter.OnItemClickListener {
 
     protected BasePullUpRecyclerAdapter<T> adapter;
     protected RecyclerView recyclerView;
-    protected ArrayList<T> datas = new ArrayList<>();
+    protected List<T> datas = new ArrayList<>();
 
     protected abstract BasePullUpRecyclerAdapter<T> getAdapter();
 
     protected abstract ArrayList<T> parserInAsync(byte[] t);
 
     protected HttpCallback callBack = new HttpCallback() {
-        private ArrayList<T> tempDatas;
+        private List<T> tempDatas;
 
         @Override
         public void onSuccessInAsync(byte[] t) {
@@ -42,7 +45,7 @@ public abstract class MainListFragment<T> extends MainFragment<PullListDelegate>
             try {
                 tempDatas = parserInAsync(t);
             } catch (Exception e) {
-                tempDatas = null;
+                tempDatas = Collections.EMPTY_LIST;
             }
         }
 
@@ -51,17 +54,15 @@ public abstract class MainListFragment<T> extends MainFragment<PullListDelegate>
             super.onSuccess(t);
             Loger.debug("===列表网络请求:" + t);
             if (viewDelegate != null && viewDelegate.mEmptyLayout != null) {
-                if (tempDatas == null || tempDatas.isEmpty() || adapter == null) {
+                if (tempDatas == null || tempDatas.isEmpty() || adapter == null || adapter
+                        .getItemCount() < 1) {
                     viewDelegate.mEmptyLayout.setErrorType(EmptyLayout.NODATA);
-                } else if (adapter
-                        .getItemCount() > 1 && tempDatas.size() == 0) {
-                    viewDelegate.mEmptyLayout.setErrorType(EmptyLayout.NO_MORE_DATE);
+                    adapter.setState(BasePullUpRecyclerAdapter.STATE_INVISIBLE);
                 } else {
                     viewDelegate.mEmptyLayout.dismiss();
                     adapter.refresh(tempDatas);
                     datas = tempDatas;
                 }
-
             }
 
         }
@@ -90,8 +91,8 @@ public abstract class MainListFragment<T> extends MainFragment<PullListDelegate>
     };
 
     @Override
-    protected Class<PullListDelegate> getDelegateClass() {
-        return PullListDelegate.class;
+    protected Class<BaseListDelegate> getDelegateClass() {
+        return BaseListDelegate.class;
     }
 
     @Override
@@ -102,7 +103,7 @@ public abstract class MainListFragment<T> extends MainFragment<PullListDelegate>
         bindEven();
         viewDelegate.setOnRefreshListener(this);
         adapter.setOnItemClickListener(this);
-        doRequest();
+        //doRequest();
     }
 
     private void bindEven() {
@@ -138,7 +139,7 @@ public abstract class MainListFragment<T> extends MainFragment<PullListDelegate>
     }
 
     public void onBottom() {
-        adapter.setState(BasePullUpRecyclerAdapter.STATE_NO_MORE);
+        adapter.setState(BasePullUpRecyclerAdapter.STATE_LOADING);
     }
 
     @Override
